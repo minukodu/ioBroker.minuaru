@@ -1,0 +1,116 @@
+{
+    "type": "panel",
+    "label": "settings",
+    "items": {
+        "_typeWarning": {
+            "type": "header",
+            "size:": 1,
+            "text": "INVALID TYPE: this configuration is only valid for state-types BOOLEAN, NUMBER or STRING",
+            "hidden": "customObj && customObj.common && customObj.common.type === 'boolean' || customObj.common.type === 'number' || customObj.common.type === 'string'"
+        },
+        "lowEnabled": {
+            "type": "checkbox",
+            "default": false,
+            "label": "trigger alarm with state=false",
+            "help": "enable trigger on false otherwise with state=true",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean'",
+            "sm": 12,
+            "lg": 6
+        },
+        "comparator": {
+            "type": "select",
+            "options": [
+                {
+                    "label": "greater than",
+                    "value": "gt"
+                },
+                {
+                    "label": "lower than",
+                    "value": "lt"
+                }
+            ],
+            "default": "gt",
+            "help": "comparator of trigger",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'number'",
+            "sm": 12,
+            "lg": 6
+        },
+        "comparatorValue": {
+            "type": "number",
+            "default": 0,
+            "help": "value to compare",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'number'",
+            "sm": 12,
+            "lg": 6
+        },
+        "comparatorText": {
+            "type": "text",
+            "maxLength": "255",
+            "default": "state not ok",
+            "help": "text to compare if value of state = text then alarm will be triggerd",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'string'",
+            "sm": 12,
+            "lg": 12
+        },
+        "alarmClass": {
+            "type": "select",
+            "options": [
+                {
+                    "label": "information",
+                    "value": "information"
+                },
+                {
+                    "label": "warning",
+                    "value": "warning"
+                },
+                {
+                    "label": "alarm",
+                    "value": "alarm"
+                }
+            ],
+            "default": "alarm",
+            "help": "alarmClass",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string'",
+            "sm": 12,
+            "lg": 6
+        },
+        "alarmText": {
+            "type": "text",
+            "maxLength": "255",
+            "defaultFunc": "customObj && customObj.common && customObj.common.name ? customObj.common.name + ' alarm':``",
+            "help": "alarmtext",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string'",
+            "sm": 12
+        },
+        "alarmArea": {
+            "type": "text",
+            "maxLength": "255",
+            "default": "undefined area",
+            "help": "alarmArea e.g. room",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string'",
+            "sm": 12,
+            "lg": 6
+        },
+        "debounce": {
+            "type": "number",
+            "newLine": true,
+            "label": "De-bounce time",
+            "help": "De-bounce interval(ms)",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string'",
+            "min": 0,
+            "max": 86400000,
+            "default": 300,
+            "sm": 12,
+            "lg": 6
+        },
+        "sendToTelegram": {
+            "type": "checkbox",
+            "default": false,
+            "label": "send alarmtext to telegram",
+            "help": "enable send alarmtext to telegram",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string'",
+            "sm": 12,
+            "lg": 6
+        }
+    }
+}

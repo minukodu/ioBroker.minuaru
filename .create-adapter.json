@@ -1,0 +1,42 @@
+{
+	"cli": true,
+	"target": "directory",
+	"adapterName": "minuaru",
+	"title": "minuvis alarmsystem",
+	"description": "alarmsystem for ioBroker and minuvis",
+	"keywords": [
+		"visualization",
+		"alarmsystem"
+	],
+	"expert": "no",
+	"features": [
+		"adapter"
+	],
+	"adminFeatures": [],
+	"type": "storage",
+	"startMode": "daemon",
+	"connectionType": "local",
+	"dataSource": "assumption",
+	"connectionIndicator": "no",
+	"language": "JavaScript",
+	"adminReact": "no",
+	"tools": [
+		"ESLint",
+		"type checking"
+	],
+	"releaseScript": "yes",
+	"devServer": "yes",
+	"devServerPort": 8081,
+	"indentation": "Tab",
+	"quotes": "double",
+	"es6class": "yes",
+	"authorName": "svallant",
+	"authorGithub": "svallant",
+	"authorEmail": "svallant@gmx.eu",
+	"gitRemoteProtocol": "HTTPS",
+	"gitCommit": "no",
+	"defaultBranch": "main",
+	"license": "MIT License",
+	"dependabot": "no",
+	"creatorVersion": "2.0.2"
+}

@@ -1,0 +1,28 @@
+{
+  "type": "panel",
+  "label": "options",
+  "items": {
+    "minuVisColumnNames": {
+      "type": "text",
+      "maxLength": "255",
+      "default": "time comes,time goes,time ack,alarmtext,area,acknowlegde",
+      "help": "column names for minuvis: e.g. 'time comes,time goes,time ack,alarmtext,area,acknowlegde'",
+      "sm": 12
+    },
+    "telegram": {
+      "newLine": true,
+      "type": "instance",
+      "adapter": "telegram",
+      "label": "telegram instance",
+      "help": "telegram instance for receiving alarms",
+      "sm": 6
+    },
+    "telegramUser": {
+      "type": "text",
+      "maxLength": "255",
+      "placeholder": "username",
+      "help": "username for telegram",
+      "sm": 6
+    }
+  }
+}
