@@ -6,7 +6,7 @@
     "name": "svallant",
     "email": "svallant@gmx.eu"
   },
-  "homepage": "https://github.com/svallant/ioBroker.minuaru",
+  "homepage": "https://github.com/minukodu/ioBroker.minuaru",
   "license": "MIT",
   "keywords": [
     "visualization",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/svallant/ioBroker.minuaru"
+    "url": "https://github.com/minukodu/ioBroker.minuaru"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.5.1",
@@ -63,7 +63,7 @@
     "release": "release-script"
   },
   "bugs": {
-    "url": "https://github.com/svallant/ioBroker.minuaru/issues"
+    "url": "https://github.com/minukodu/ioBroker.minuaru/issues"
   },
   "readmeFilename": "README.md"
 }
