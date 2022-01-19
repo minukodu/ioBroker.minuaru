@@ -6,8 +6,9 @@
 
 // The adapter-core module gives you access to the core ioBroker functions
 const utils = require("@iobroker/adapter-core");
-const fs = require('fs');
+const fs = require("fs");
 const databaseTools = require("./lib/sqlite");
+const jsonToHtml = require("./lib/jsonToHtml");
 
 class Minuaru extends utils.Adapter {
 
@@ -91,6 +92,17 @@ class Minuaru extends utils.Adapter {
 			},
 			native: {},
 		});
+		await this.setObjectNotExistsAsync("htmlMinuVisBanner", {
+			type: "state",
+			common: {
+				name: "htmlMinuVisBanner",
+				type: "string",
+				role: "html",
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
 		await this.setObjectNotExistsAsync("jsonAlarmHistory", {
 			type: "state",
 			common: {
@@ -135,10 +147,10 @@ class Minuaru extends utils.Adapter {
 			},
 			native: {},
 		});
-		await this.setObjectNotExistsAsync("minuVisColumnNames", {
+		await this.setObjectNotExistsAsync("minuVisConfig", {
 			type: "state",
 			common: {
-				name: "minuVisColumnNames",
+				name: "minuVisConfig",
 				type: "string",
 				role: "json",
 				read: true,
@@ -146,8 +158,20 @@ class Minuaru extends utils.Adapter {
 			},
 			native: {},
 		});
-		this.log.debug("set minuvisColumnNames: " + this.config.minuVisColumnNames);
-		await this.setStateAsync("minuVisColumnNames", this.config.minuVisColumnNames || "time comes,time goes,time ack,alarmtext,area,acknowlegde");
+		// set minuVis config
+		this.minuVisConfig = {
+			"columnNames": this.config.columnNames || "time comes,time goes,time ack,alarmtext,area,acknowlegde",
+			"alarm_colorActive": this.config.alarm_colorActive || "#ff0000",
+			"alarm_colorGone": this.config.alarm_colorGone || "#ff6666",
+			"alarm_foregroundColor": this.config.alarm_foregroundColor || "#ffffff",
+			"warning_colorActive": this.config.warning_colorActive || "#ffff00",
+			"warning_colorGone": this.config.warning_colorGone || "#f3f3ae",
+			"warning_foregroundColor": this.config.warning_foregroundColor || "#000000",
+			"information_colorActive": this.config.information_colorActive || "#0000ff",
+			"information_colorGone": this.config.information_colorGone || "#8080ff",
+			"information_foregroundColor": this.config.information_foregroundColor || "#ffffff",
+		};
+		await this.setStateAsync("minuVisConfig", JSON.stringify(this.minuVisConfig));
 		// subscribe all states and objects
 		this.subscribeForeignStates("*");
 		this.subscribeForeignObjects("*");
@@ -163,6 +187,10 @@ class Minuaru extends utils.Adapter {
 							this.log.debug("type: " + JSON.stringify(object.common.type));
 							this.registerState(data.id, data.value[this.namespace], object.common.type)
 							this.log.debug("this.registeredStates: " + JSON.stringify(this.registeredStates));
+							this.getForeignState(data.id, (err, state) => {
+								this.handleStateChange(data.id, state, true);
+								this.log.debug("initialize status of: " + data.id);
+							});
 						});
 					}
 				}
@@ -213,10 +241,10 @@ class Minuaru extends utils.Adapter {
 	 * @param {ioBroker.State | null | undefined} state
 	 */
 	onStateChange(id, state) {
-		this.handleStateChange(id, state);
+		this.handleStateChange(id, state, false);
 	}
 
-	handleStateChange(id, state) {
+	handleStateChange(id, state, startUp) {
 		let updateNeeded = false;
 		if (state) {
 			let debugInfo;
@@ -298,9 +326,12 @@ class Minuaru extends utils.Adapter {
 					// is alarm active ?
 					let getNbActiveAlarms = databaseTools.getNbActiveAlarmOfId(this.db, data);
 					// compare
-					if (getNbActiveAlarms === 0 && state.val == customSettings.comparatorText) {
+					this.log.debug("string  val: " + state.val);
+					this.log.debug("compare val: " + customSettings.comparatorText);
+
+					if (getNbActiveAlarms === 0 && state.val === customSettings.comparatorText) {
 						alarmComes = true;
-					} else {
+					} else if (state.val !== customSettings.comparatorText) {
 						alarmGoes = true;
 					}
 				} // END boolean  or number or string ?
@@ -322,7 +353,7 @@ class Minuaru extends utils.Adapter {
 				if (this.registeredStates[id].skipEvents === false && (alarmComes === true || alarmGoes === true)) {
 					this.log.debug("skipEvents: " + JSON.stringify(this.registeredStates[id].skipEvents));
 					// set debounce-timer
-					if (customSettings.debounce && customSettings.debounce > 0) {
+					if (startUp === false && customSettings.debounce && customSettings.debounce > 0) {
 						this.log.debug("set debounce timer: " + JSON.stringify(id));
 						this.registeredStates[id].valueAtAlarm = state.val;
 						this.log.debug("value at alarm: " + JSON.stringify(this.registeredStates[id].valueAtAlarm));
@@ -335,7 +366,7 @@ class Minuaru extends utils.Adapter {
 									this.log.debug("value at alarm: " + JSON.stringify(this.registeredStates[id].valueAtAlarm));
 									if (state && this.registeredStates[id].valueAtAlarm !== state.val) {
 										this.log.debug("handle alarm at reset debounce: " + JSON.stringify(id));
-										this.handleStateChange(id, state);
+										this.handleStateChange(id, state, false);
 									}
 								});
 								this.log.debug("reset debounce timer: " + JSON.stringify(id));
@@ -358,18 +389,26 @@ class Minuaru extends utils.Adapter {
 		// update html amd json data
 		let alarmListData = databaseTools.getAlarmListData(this.db);
 		this.log.debug("new alarm data: " + JSON.stringify(alarmListData));
-		// write Data in states
+		// write json-Data in states
 		this.setStateAsync('jsonAlarmHistory', JSON.stringify(alarmListData.allAlarms) || "no data");
 		this.setStateAsync('jsonAlarmsActive', JSON.stringify(alarmListData.allActiveAlarms) || "no data");
 		this.setStateAsync('nbAlarmsActive', alarmListData.allActiveAlarms.length || 0);
 		this.setStateAsync('nbAlarmsActiveNotAcknowledged', alarmListData.nbActiveAlarmsNotAcknowledged || 0);
+		// generate HTML-tables
+		let htmlAlarmHistory = jsonToHtml.jsonToHtmlAlarms(alarmListData.allAlarms, "history", true, this.minuVisConfig);
+		let htmlAlarmsActive = jsonToHtml.jsonToHtmlAlarms(alarmListData.allActiveAlarms, "active", true, this.minuVisConfig);
+		let htmlAlarmBanner = jsonToHtml.jsonToHtmlAlarms([alarmListData.allActiveNotAcknowledgedAlarms[0] || null], "banner", false, this.minuVisConfig);
+		let css = jsonToHtml.getCSS(this.minuVisConfig);
+		this.setStateAsync('htmlAlarmHistory', css + htmlAlarmHistory || "no data");
+		this.setStateAsync('htmlAlarmsActive', css + htmlAlarmsActive || "no data");
+		this.setStateAsync('htmlMinuVisBanner', css + htmlAlarmBanner || "");
 	}
 	// send to telegram
 	sendToTelegram(alarmText) {
-		if (this.config.telegram && this.config.telegram.length > 0 && this.config.telegramUser && this.config.telegramUser.length > 0) {
+		if (this.config.telegram && this.config.telegram.instance && this.config.telegram.instance.length > 0 && this.config.telegram.user && this.config.telegram.user.length > 0) {
 			// send Text to telegram-instance
 			this.log.debug("sendToTelegram: " + alarmText);
-			this.sendTo("minuaru", alarmText);
+			this.sendTo(this.config.telegram.instance, { user: this.config.telegram.user, text: alarmText });
 		}
 	}
 	// register state
@@ -409,8 +448,8 @@ class Minuaru extends utils.Adapter {
 		}
 		return config;
 	}
-}
 
+}
 if (require.main !== module) {
 	// Export the constructor in compact mode
 	/**
