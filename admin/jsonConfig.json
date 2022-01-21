@@ -18,6 +18,20 @@
           "placeholder": "username",
           "help": "username for telegram",
           "sm": 6
+        },
+        "telegram.textComes": {
+          "type": "text",
+          "maxLength": "255",
+          "default": "⚠ %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
+          "help": "text for telegram if alarm comes, use %NL% for new line",
+          "sm": 12
+        },
+        "telegram.textGoes": {
+          "type": "text",
+          "maxLength": "255",
+          "default": "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%",
+          "help": "text for telegram if alarm goes, use %NL% for new line",
+          "sm": 12
         }
       }
     },

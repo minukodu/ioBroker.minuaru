@@ -158,6 +158,14 @@ class Minuaru extends utils.Adapter {
 			},
 			native: {},
 		});
+		// set telegram config
+		if (this.config.telegram) {
+			this.telegramAlarmTextComes = this.config.telegram.textComes || "⚠ %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%";
+			this.telegramAlarmTextGoes = this.config.telegram.textGoes || "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%";
+		} else {
+			this.telegramAlarmTextComes = "⚠ %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%";
+			this.telegramAlarmTextGoes = "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%";
+		}
 		// set minuVis config
 		this.minuVisConfig = {
 			"columnNames": this.config.columnNames || "time comes,time goes,time ack,alarmtext,area,acknowlegde",
@@ -340,14 +348,14 @@ class Minuaru extends utils.Adapter {
 					data.tsComes = Date.now();
 					debugInfo = databaseTools.insertAlarmComes(this.db, data);
 					this.log.debug("insert alarm comes: " + JSON.stringify(debugInfo));
-					this.sendToTelegram("alarm comes: " + data.alarmText)
+					this.sendToTelegram(true, data);
 					updateNeeded = true;
 				}
 				if (this.registeredStates[id].skipEvents === false && alarmGoes === true) {
 					data.tsGoes = Date.now();
 					debugInfo = databaseTools.updateAlarmGoes(this.db, data);
 					this.log.debug("insert alarm goes: " + JSON.stringify(debugInfo));
-					this.sendToTelegram("alarm goes: " + data.alarmText)
+					this.sendToTelegram(false, data);
 					updateNeeded = true;
 				}
 				if (this.registeredStates[id].skipEvents === false && (alarmComes === true || alarmGoes === true)) {
@@ -404,11 +412,35 @@ class Minuaru extends utils.Adapter {
 		this.setStateAsync('htmlMinuVisBanner', css + htmlAlarmBanner || "");
 	}
 	// send to telegram
-	sendToTelegram(alarmText) {
+	sendToTelegram(alarmComes, data) {
 		if (this.config.telegram && this.config.telegram.instance && this.config.telegram.instance.length > 0 && this.config.telegram.user && this.config.telegram.user.length > 0) {
-			// send Text to telegram-instance
-			this.log.debug("sendToTelegram: " + alarmText);
-			this.sendTo(this.config.telegram.instance, { user: this.config.telegram.user, text: alarmText });
+			// check comes or goes
+			let telegramText = "";
+			if (alarmComes === true) {
+				telegramText = this.telegramAlarmTextComes;
+			} else {
+				telegramText = this.telegramAlarmTextGoes;
+			}
+			// replace placeholder
+			telegramText = telegramText.replace(/%NL%/g, "\n");
+			telegramText = telegramText.replace(/%ALARMTEXT%/g, data.alarmText);
+			telegramText = telegramText.replace(/%ALARMCLASS%/g, data.alarmClass);
+			telegramText = telegramText.replace(/%ALARMAREA%/g, data.alarmArea);
+
+			this.log.debug("sendToTelegram: " + telegramText);
+			this.sendTo(this.config.telegram.instance, 'ask', {
+				user: this.config.telegram.user,
+				text: telegramText,
+				parse_mode: 'MarkdownV2',
+				reply_markup: {
+					inline_keyboard: [
+						[{ text: '✅', callback_data: data.stateId }],
+					]
+				}
+			}, msg => {
+				this.debug.log("ack from telegram: " + msg.data);
+				this.setStateAsync("stateIdToAcknowledge", msg.data);
+			});
 		}
 	}
 	// register state
