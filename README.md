@@ -15,6 +15,45 @@
 
 alarmsystem for ioBroker and minuvis
 
+## Instructions
+
+- install adapter as usual
+- create instance of minuvis (only 1 possible)
+- configuring the adapter setting
+
+- select the telegram instance and set the username 
+![minuaruTelegramSettings](https://user-images.githubusercontent.com/20790635/151257135-3b8e335f-9510-4531-9452-a982426011ab.png)
+
+- adjust the Telegram message text if necessary
+![minuaruTelegramMessageSettings](https://user-images.githubusercontent.com/20790635/151257507-b882a3ec-88b3-4c91-bc24-c774db30908f.png)
+
+- translate the columns title of the alarm table
+![minuaruAlarmtableSettingsheader](https://user-images.githubusercontent.com/20790635/151255365-4613045d-c868-4e5e-b428-9077b7ae6f99.png)
+
+- change the colors of the message lines and text color if necessary
+![minuaruAlarmtableSettingsColor](https://user-images.githubusercontent.com/20790635/151256690-ee9bead9-9277-4438-998b-c04d8c566124.png)
+
+- activate minuaru on desired objects
+![activateMinuaru](https://user-images.githubusercontent.com/20790635/151258456-58e99565-8af5-4200-a1f0-c6c75f4351d2.png)
+
+- activate Minuaru and set an object's setting
+![setSettingsObjects](https://user-images.githubusercontent.com/20790635/151258700-4d3ca8ca-5df0-4c3d-9638-968b97d788eb.png)
+
+- activate the alarm page in Minukodu Builder and the minuaru.0 adapter
+
+    ![activateAlarmpage](https://user-images.githubusercontent.com/20790635/151258040-6bb074e3-bd35-45b5-9888-5e826a7d3edc.png)
+
+- use the new alarm page, also click on the number in the Minuvis header
+![useNewAlarmPage](https://user-images.githubusercontent.com/20790635/151259455-c8d5a676-027a-4651-813b-211ca2083fd9.png)
+
+- acknowledge the alarms to reduce the number of pending alarms
+![acknowledgeAlarms](https://user-images.githubusercontent.com/20790635/151259642-4daec6cf-35fa-4e68-9d92-0000c2d41c25.png)
+
+- use the html or json objects for integration into other visualizations
+![otherObjects](https://user-images.githubusercontent.com/20790635/151259992-61758c9c-e102-4f38-ae0e-931721d04a17.png)
+
+
+
 
 ## Changelog
 <!--
@@ -22,7 +61,7 @@ alarmsystem for ioBroker and minuvis
 	### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
+### 0.0.1 (2022-01-16)
 * (svallant) initial release
 
 ## License
