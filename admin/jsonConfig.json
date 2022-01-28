@@ -19,18 +19,58 @@
           "help": "username for telegram",
           "sm": 6
         },
-        "telegram.textComes": {
+        "_divider_1": {
+          "type": "divider",
+          "height": 5
+        },
+        "telegram.alarm_textComes": {
           "type": "text",
           "maxLength": "255",
-          "default": "⚠ %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
+          "default": "🔴 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
           "help": "text for telegram if alarm comes, use %NL% for new line",
           "sm": 12
         },
-        "telegram.textGoes": {
+        "telegram.alarm_textGoes": {
           "type": "text",
           "maxLength": "255",
           "default": "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%",
           "help": "text for telegram if alarm goes, use %NL% for new line",
+          "sm": 12
+        },
+        "_divider_2": {
+          "type": "divider",
+          "height": 5
+        },
+        "telegram.warning_textComes": {
+          "type": "text",
+          "maxLength": "255",
+          "default": "🟡 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
+          "help": "text for telegram if warning comes, use %NL% for new line",
+          "sm": 12
+        },
+        "telegram.warning_textGoes": {
+          "type": "text",
+          "maxLength": "255",
+          "default": "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%",
+          "help": "text for telegram if warning goes, use %NL% for new line",
+          "sm": 12
+        },
+        "_divider_3": {
+          "type": "divider",
+          "height": 5
+        },
+        "telegram.information_textComes": {
+          "type": "text",
+          "maxLength": "255",
+          "default": "🔵 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
+          "help": "text for telegram if information comes, use %NL% for new line",
+          "sm": 12
+        },
+        "telegram.information_textGoes": {
+          "type": "text",
+          "maxLength": "255",
+          "default": "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%",
+          "help": "text for telegram if information goes, use %NL% for new line",
           "sm": 12
         }
       }

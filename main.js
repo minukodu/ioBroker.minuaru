@@ -348,14 +348,18 @@ class Minuaru extends utils.Adapter {
 					data.tsComes = Date.now();
 					debugInfo = databaseTools.insertAlarmComes(this.db, data);
 					this.log.debug("insert alarm comes: " + JSON.stringify(debugInfo));
-					this.sendToTelegram(true, data);
+					if (customSettings.sendToTelegram === true) {
+						this.sendToTelegram(true, data);
+					}
 					updateNeeded = true;
 				}
 				if (this.registeredStates[id].skipEvents === false && alarmGoes === true) {
 					data.tsGoes = Date.now();
 					debugInfo = databaseTools.updateAlarmGoes(this.db, data);
 					this.log.debug("insert alarm goes: " + JSON.stringify(debugInfo));
-					this.sendToTelegram(false, data);
+					if (customSettings.sendToTelegram === true) {
+						this.sendToTelegram(false, data);
+					}
 					updateNeeded = true;
 				}
 				if (this.registeredStates[id].skipEvents === false && (alarmComes === true || alarmGoes === true)) {
@@ -396,7 +400,7 @@ class Minuaru extends utils.Adapter {
 	updateListData() {
 		// update html amd json data
 		let alarmListData = databaseTools.getAlarmListData(this.db);
-		this.log.debug("new alarm data: " + JSON.stringify(alarmListData));
+		// this.log.debug("new alarm data: " + JSON.stringify(alarmListData));
 		// write json-Data in states
 		this.setStateAsync('jsonAlarmHistory', JSON.stringify(alarmListData.allAlarms) || "no data");
 		this.setStateAsync('jsonAlarmsActive', JSON.stringify(alarmListData.allActiveAlarms) || "no data");
