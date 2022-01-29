@@ -37,7 +37,7 @@ alarmsystem for ioBroker and minuvis
 - activate Minuaru and set an object's setting
 ![setSettingsObjects](https://user-images.githubusercontent.com/20790635/151258700-4d3ca8ca-5df0-4c3d-9638-968b97d788eb.png)
 
-> for **ioBroker.minuvis**-users (you need version > 2.3.0):
+> for **ioBroker.minuvis**-users (you need version >= 2.3.0):
 
 - activate the alarmpage and the minuaru.0-instance in builder 
 
