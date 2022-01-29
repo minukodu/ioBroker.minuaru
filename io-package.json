@@ -1,84 +1,96 @@
 {
-	"common": {
-		"name": "minuaru",
-		"version": "0.0.1",
-		"news": {
-			"0.0.1": {
-				"en": "initial release",
-				"de": "Erstveröffentlichung",
-				"ru": "Начальная версия",
-				"pt": "lançamento inicial",
-				"nl": "Eerste uitgave",
-				"fr": "Première version",
-				"it": "Versione iniziale",
-				"es": "Versión inicial",
-				"pl": "Pierwsze wydanie",
-				"zh-cn": "首次出版"
-			}
-		},
-		"title": "minuvis alarmsystem",
-		"titleLang": {
-			"en": "minuvis alarmsystem",
-			"de": "minuvis Alarmsystem",
-			"ru": "сигнализация минувис",
-			"pt": "sistema de alarme minuvis",
-			"nl": "minuvis alarmsysteem",
-			"fr": "système d'alarme minuvis",
-			"it": "sistema di allarme minuvis",
-			"es": "sistema de alarma minuvis",
-			"pl": "system alarmowy minuvis",
-			"zh-cn": "minuvis报警系统"
-		},
-		"desc": {
-			"en": "alarmsystem for ioBroker and minuvis",
-			"de": "Alarmsystem für ioBroker und minuvis",
-			"ru": "сигнализация для ioBroker и minuvis",
-			"pt": "sistema de alarme para ioBroker e minuvis",
-			"nl": "alarmsysteem voor ioBroker en minuvis",
-			"fr": "système d'alarme pour ioBroker et minuvis",
-			"it": "sistema di allarme per ioBroker e minuvis",
-			"es": "sistema de alarma para ioBroker y minuvis",
-			"pl": "system alarmowy dla ioBroker i minuvis",
-			"zh-cn": "ioBroker 和 minuvis 的报警系统"
-		},
-		"authors": [
-			"svallant <svallant@gmx.eu>"
-		],
-		"keywords": [
-			"visualization",
-			"alarmsystem"
-		],
-		"license": "MIT",
-		"platform": "Javascript/Node.js",
-		"main": "main.js",
-		"icon": "minuaru.png",
-		"enabled": true,
-		"extIcon": "https://raw.githubusercontent.com/minukodu/ioBroker.minuaru/main/admin/minuaru.png",
-		"readme": "https://github.com/minukodu/ioBroker.minuaru/blob/main/README.md",
-		"loglevel": "info",
-		"mode": "daemon",
-		"type": "storage",
-		"compact": true,
-		"connectionType": "local",
-		"dataSource": "push",
-		"materialize": true,
-		"dependencies": [
-			{
-				"js-controller": ">=2.0.0",
-				"admin": ">=5.0.0"
-			}
-		],
-		"globalDependencies": [
-			{
-				"admin": ">=5.0.0"
-			}
-		],
-		"adminUI": {
-			"config": "json",
-			"custom": "json"
-		}
-	},
-	"native": {},
-	"objects": [],
-	"instanceObjects": []
+    "common": {
+        "name": "minuaru",
+        "version": "0.9.0",
+        "news": {
+            "0.9.0": {
+                "en": "beta release",
+                "de": "Beta-Version",
+                "ru": "бета-версия",
+                "pt": "versão beta",
+                "nl": "bètaversie",
+                "fr": "version bêta",
+                "it": "versione beta",
+                "es": "versión beta",
+                "pl": "wersja beta",
+                "zh-cn": "测试版"
+            },
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "title": "minuvis alarmsystem",
+        "titleLang": {
+            "en": "minuvis alarmsystem",
+            "de": "minuvis Alarmsystem",
+            "ru": "сигнализация минувис",
+            "pt": "sistema de alarme minuvis",
+            "nl": "minuvis alarmsysteem",
+            "fr": "système d'alarme minuvis",
+            "it": "sistema di allarme minuvis",
+            "es": "sistema de alarma minuvis",
+            "pl": "system alarmowy minuvis",
+            "zh-cn": "minuvis报警系统"
+        },
+        "desc": {
+            "en": "alarmsystem for ioBroker and minuvis",
+            "de": "Alarmsystem für ioBroker und minuvis",
+            "ru": "сигнализация для ioBroker и minuvis",
+            "pt": "sistema de alarme para ioBroker e minuvis",
+            "nl": "alarmsysteem voor ioBroker en minuvis",
+            "fr": "système d'alarme pour ioBroker et minuvis",
+            "it": "sistema di allarme per ioBroker e minuvis",
+            "es": "sistema de alarma para ioBroker y minuvis",
+            "pl": "system alarmowy dla ioBroker i minuvis",
+            "zh-cn": "ioBroker 和 minuvis 的报警系统"
+        },
+        "authors": [
+            "svallant <svallant@gmx.eu>"
+        ],
+        "keywords": [
+            "visualization",
+            "alarmsystem"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "minuaru.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/minukodu/ioBroker.minuaru/main/admin/minuaru.png",
+        "readme": "https://github.com/minukodu/ioBroker.minuaru/blob/main/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "storage",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "push",
+        "materialize": true,
+        "dependencies": [
+            {
+                "js-controller": ">=2.0.0",
+                "admin": ">=5.0.0"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=5.0.0"
+            }
+        ],
+        "adminUI": {
+            "config": "json",
+            "custom": "json"
+        }
+    },
+    "native": {},
+    "objects": [],
+    "instanceObjects": []
 }

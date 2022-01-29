@@ -3,13 +3,11 @@
 
 [![NPM version](https://img.shields.io/npm/v/iobroker.minuaru.svg)](https://www.npmjs.com/package/iobroker.minuaru)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.minuaru.svg)](https://www.npmjs.com/package/iobroker.minuaru)
-![Number of Installations](https://iobroker.live/badges/minuaru-installed.svg)
-![Current version in stable repository](https://iobroker.live/badges/minuaru-stable.svg)
-[![Dependency Status](https://img.shields.io/david/svallant/iobroker.minuaru.svg)](https://david-dm.org/svallant/iobroker.minuaru)
+[!Number of Installations](https://iobroker.live/badges/minuaru-installed.svg)
+[!Current version in stable repository](https://iobroker.live/badges/minuaru-stable.svg)
 
 [![NPM](https://nodei.co/npm/iobroker.minuaru.png?downloads=true)](https://nodei.co/npm/iobroker.minuaru/)
 
-**Tests:** ![Test and Release](https://github.com/svallant/ioBroker.minuaru/workflows/Test%20and%20Release/badge.svg)
 
 ## minuaru adapter for ioBroker
 
@@ -18,16 +16,16 @@ alarmsystem for ioBroker and minuvis
 ## Instructions
 
 - install adapter as usual
-- create instance of minuvis (only 1 possible)
-- configuring the adapter setting
+- create instance of minuaru
+- configuring the adapter settings
 
-- select the telegram instance and set the username 
+- select the telegram instance and set the username if you like send alarms to telegram 
 ![minuaruTelegramSettings](https://user-images.githubusercontent.com/20790635/151257135-3b8e335f-9510-4531-9452-a982426011ab.png)
 
-- adjust the Telegram message text if necessary
+- adjust the telegram message text if necessary
 ![minuaruTelegramMessageSettings](https://user-images.githubusercontent.com/20790635/151257507-b882a3ec-88b3-4c91-bc24-c774db30908f.png)
 
-- translate the columns title of the alarm table
+- translate the columns title of the alarm table if necessary
 ![minuaruAlarmtableSettingsheader](https://user-images.githubusercontent.com/20790635/151255365-4613045d-c868-4e5e-b428-9077b7ae6f99.png)
 
 - change the colors of the message lines and text color if necessary
@@ -39,11 +37,13 @@ alarmsystem for ioBroker and minuvis
 - activate Minuaru and set an object's setting
 ![setSettingsObjects](https://user-images.githubusercontent.com/20790635/151258700-4d3ca8ca-5df0-4c3d-9638-968b97d788eb.png)
 
-- activate the alarm page in Minukodu Builder and the minuaru.0 adapter
+> for ioBorker.minuvis-users:
 
-    ![activateAlarmpage](https://user-images.githubusercontent.com/20790635/151258040-6bb074e3-bd35-45b5-9888-5e826a7d3edc.png)
+- activate the alarmpage and the minuaru.0-instance in builder 
 
-- use the new alarm page, also click on the number in the Minuvis header
+![activateAlarmpage](https://user-images.githubusercontent.com/20790635/151258040-6bb074e3-bd35-45b5-9888-5e826a7d3edc.png)
+
+- the number in the minuvis-header links to the alarmpage
 ![useNewAlarmPage](https://user-images.githubusercontent.com/20790635/151259455-c8d5a676-027a-4651-813b-211ca2083fd9.png)
 
 - acknowledge the alarms to reduce the number of pending alarms
@@ -53,13 +53,10 @@ alarmsystem for ioBroker and minuvis
 ![otherObjects](https://user-images.githubusercontent.com/20790635/151259992-61758c9c-e102-4f38-ae0e-931721d04a17.png)
 
 
-
-
 ## Changelog
-<!--
-	Placeholder for the next version (at the beginning of the line):
-	### **WORK IN PROGRESS**
--->
+
+### 0.9.0 (2022-01-29)
+* (svallant) beta release
 
 ### 0.0.1 (2022-01-16)
 * (svallant) initial release
