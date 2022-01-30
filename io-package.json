@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "minuaru",
-        "version": "0.9.0",
+        "version": "0.9.1",
         "news": {
+            "0.9.1": {
+                "en": "send to telegram improvements",
+                "de": "Verbesserungen an Telegramm senden",
+                "ru": "отправить в телеграмм улучшения",
+                "pt": "enviar para o telegram melhorias",
+                "nl": "stuur naar telegram verbeteringen",
+                "fr": "envoyer aux améliorations de télégramme",
+                "it": "invia a telegramma miglioramenti",
+                "es": "enviar a telegram mejoras",
+                "pl": "wyślij do ulepszeń telegramu",
+                "zh-cn": "发送到电报改进"
+            },
             "0.9.0": {
                 "en": "beta release",
                 "de": "Beta-Version",
