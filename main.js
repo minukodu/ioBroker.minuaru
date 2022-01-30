@@ -53,7 +53,7 @@ class Minuaru extends utils.Adapter {
 			common: {
 				name: "nbAlarmsActive",
 				type: "number",
-				role: "info",
+				role: "value",
 				read: true,
 				write: true,
 			},
@@ -64,7 +64,7 @@ class Minuaru extends utils.Adapter {
 			common: {
 				name: "nbAlarmsActiveNotAcknowledged",
 				type: "number",
-				role: "info",
+				role: "value",
 				read: true,
 				write: true,
 			},
@@ -130,7 +130,7 @@ class Minuaru extends utils.Adapter {
 			common: {
 				name: "stateIdToAcknowledge",
 				type: "string",
-				role: "stateId",
+				role: "text",
 				read: true,
 				write: true,
 			},
@@ -141,7 +141,7 @@ class Minuaru extends utils.Adapter {
 			common: {
 				name: 'deleteAlarmTable',
 				type: 'boolean',
-				role: '',
+				role: 'button',
 				read: true,
 				write: true,
 			},
@@ -159,25 +159,34 @@ class Minuaru extends utils.Adapter {
 			native: {},
 		});
 		// set telegram config
+		this.telegramConfig = {};
 		if (this.config.telegram) {
-			this.telegramAlarmTextComes = this.config.telegram.textComes || "⚠ %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%";
-			this.telegramAlarmTextGoes = this.config.telegram.textGoes || "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%";
+			this.telegramConfig.alarm_textComes = this.config.telegram.alarm_textComes || "🔴 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%";
+			this.telegramConfig.alarm_textGoes = this.config.telegram.alarm_textGoes || "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%";
+			this.telegramConfig.warning_textComes = this.config.telegram.warning_textComes || "🟡 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%";
+			this.telegramConfig.warning_textGoes = this.config.telegram.warning_textGoes || "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%";
+			this.telegramConfig.information_textComes = this.config.telegram.information_textComes || "🔵 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%";
+			this.telegramConfig.information_textGoes = this.config.telegram.information_textGoes || "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%";
 		} else {
-			this.telegramAlarmTextComes = "⚠ %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%";
-			this.telegramAlarmTextGoes = "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%";
+			this.telegramConfig.alarm_textComes = "🔴 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%";
+			this.telegramConfig.alarm_textGoes = "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%";
+			this.telegramConfig.warning_textComes = "🟡 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%";
+			this.telegramConfig.warning_textGoes = "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%";
+			this.telegramConfig.information_textComes = "🔵 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%";
+			this.telegramConfig.information_textGoes = "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%";
 		}
 		// set minuVis config
 		this.minuVisConfig = {
 			"columnNames": this.config.columnNames || "time comes,time goes,time ack,alarmtext,area,acknowlegde",
-			"alarm_colorActive": this.config.alarm_colorActive || "#ff0000",
-			"alarm_colorGone": this.config.alarm_colorGone || "#ff6666",
-			"alarm_foregroundColor": this.config.alarm_foregroundColor || "#ffffff",
-			"warning_colorActive": this.config.warning_colorActive || "#ffff00",
-			"warning_colorGone": this.config.warning_colorGone || "#f3f3ae",
+			"alarm_colorActive": this.config.alarm_colorActive || "#ee2e2c",
+			"alarm_colorGone": this.config.alarm_colorGone || "#f48382",
+			"alarm_foregroundColor": this.config.alarm_foregroundColor || "#000000",
+			"warning_colorActive": this.config.warning_colorActive || "#d5ca00",
+			"warning_colorGone": this.config.warning_colorGone || "#d1cd86",
 			"warning_foregroundColor": this.config.warning_foregroundColor || "#000000",
-			"information_colorActive": this.config.information_colorActive || "#0000ff",
-			"information_colorGone": this.config.information_colorGone || "#8080ff",
-			"information_foregroundColor": this.config.information_foregroundColor || "#ffffff",
+			"information_colorActive": this.config.information_colorActive || "#4e88ca",
+			"information_colorGone": this.config.information_colorGone || "#82a4cb",
+			"information_foregroundColor": this.config.information_foregroundColor || "#000000",
 		};
 		await this.setStateAsync("minuVisConfig", JSON.stringify(this.minuVisConfig));
 		// subscribe all states and objects
@@ -418,12 +427,26 @@ class Minuaru extends utils.Adapter {
 	// send to telegram
 	sendToTelegram(alarmComes, data) {
 		if (this.config.telegram && this.config.telegram.instance && this.config.telegram.instance.length > 0 && this.config.telegram.user && this.config.telegram.user.length > 0) {
-			// check comes or goes
+			// check class and comes or goes
 			let telegramText = "";
-			if (alarmComes === true) {
-				telegramText = this.telegramAlarmTextComes;
+			if (data.alarmClass === "alarm") {
+				if (alarmComes === true) {
+					telegramText = this.telegramConfig.alarm_textComes;
+				} else {
+					telegramText = this.telegramConfig.alarm_textGoes;
+				}
+			} else if (data.alarmClass === "warning") {
+				if (alarmComes === true) {
+					telegramText = this.telegramConfig.warning_textComes;
+				} else {
+					telegramText = this.telegramConfig.warning_textGoes;
+				}
 			} else {
-				telegramText = this.telegramAlarmTextGoes;
+				if (alarmComes === true) {
+					telegramText = this.telegramConfig.information_textComes;
+				} else {
+					telegramText = this.telegramConfig.information_textGoes;
+				}
 			}
 			// replace placeholder
 			telegramText = telegramText.replace(/%NL%/g, "\n");
