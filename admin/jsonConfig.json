@@ -91,24 +91,24 @@
         },
         "alarm_colorActive": {
           "type": "color",
-          "default:": "#ff0000",
-          "label": "background color of active alarm e.g. #ff0000",
+          "default": "#ee2e2c",
+          "label": "background color of active alarm e.g. #ee2e2c",
           "help": "background color of active alarm",
           "tooltip": "background color of active alarm",
           "sm": 4
         },
         "alarm_colorGone": {
           "type": "color",
-          "default:": "#ff6666",
-          "label": "background color of gone alarm e.g. #ff6666",
+          "default": "#f48382",
+          "label": "background color of gone alarm e.g. #f48382",
           "help": "background color of gone alarm",
           "tooltip": "background color of gone alarm",
           "sm": 4
         },
         "alarm_foregroundColor": {
           "type": "color",
-          "default:": "#ffffff",
-          "label": "foreground color of alarm e.g. #ffffff",
+          "default": "#000000",
+          "label": "foreground color of alarm e.g. #000000",
           "help": "foreground color of alarm",
           "tooltip": "foreground color of alarm",
           "sm": 4
@@ -118,23 +118,23 @@
         },
         "warning_colorActive": {
           "type": "color",
-          "default:": "#ffff00",
-          "label": "background color of active warning e.g. #ffff00",
+          "default": "#d5ca00",
+          "label": "background color of active warning e.g. #d5ca00",
           "help": "background color of active warning",
           "tooltip": "background color of active warning",
           "sm": 4
         },
         "warning_colorGone": {
           "type": "color",
-          "default:": "#f3f3ae",
-          "label": "background color of gone warning e.g. #f3f3ae",
+          "default": "#d1cd86",
+          "label": "background color of gone warning e.g. #d1cd86",
           "help": "background color of gone warning",
           "tooltip": "background color of gone warning",
           "sm": 4
         },
         "warning_foregroundColor": {
           "type": "color",
-          "default:": "#000000",
+          "default": "#000000",
           "label": "foreground color of warning e.g. #000000",
           "help": "foreground color of warning",
           "tooltip": "foreground color of warning",
@@ -145,24 +145,24 @@
         },
         "information_colorActive": {
           "type": "color",
-          "default:": "#0000ff",
-          "label": "background color of active information e.g. #0000ff",
+          "default": "#4e88ca",
+          "label": "background color of active information e.g. #4e88ca",
           "help": "background color of active information",
           "tooltip": "background color of active information",
           "sm": 4
         },
         "information_colorGone": {
           "type": "color",
-          "default:": "#8080ff",
-          "label": "background color of gone information e.g. #8080ff",
+          "default": "#82a4cb",
+          "label": "background color of gone information e.g. #82a4cb",
           "help": "background color of gone information",
           "tooltip": "background color of gone information",
           "sm": 4
         },
         "information_foregroundColor": {
           "type": "color",
-          "default:": "#ffffff",
-          "label": "foreground color of information e.g. #ffffff",
+          "default": "#000000",
+          "label": "foreground color of information e.g. #000000",
           "help": "foreground color of information",
           "tooltip": "foreground color of information",
           "sm": 4

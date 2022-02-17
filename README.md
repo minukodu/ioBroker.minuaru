@@ -55,6 +55,9 @@ alarmsystem for ioBroker and minuvis
 
 ## Changelog
 
+### 0.9.2 (2022-02-16)
+* (svallant) bugfix configuration and add timestamp-checker
+
 ### 0.9.1 (2022-01-30)
 * (svallant) improvement of telegram settings
 

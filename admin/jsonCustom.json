@@ -2,18 +2,33 @@
     "type": "panel",
     "label": "settings",
     "items": {
-        "_typeWarning": {
-            "type": "header",
-            "size:": 1,
-            "text": "INVALID TYPE: this configuration is only valid for state-types BOOLEAN, NUMBER or STRING",
-            "hidden": "customObj && customObj.common && customObj.common.type === 'boolean' || customObj.common.type === 'number' || customObj.common.type === 'string'"
+        "checkTimeStamp": {
+            "type": "checkbox",
+            "default": false,
+            "label": "check if timestamp of state is too old",
+            "help": "check if timestamp of state is too old",
+            "hidden": "!customObj || !customObj.common",
+            "sm": 12,
+            "lg": 12
+        },
+        "maxAgeTimeStampMinutes": {
+            "type": "number",
+            "newLine": true,
+            "label": "max age of timestamp in minutes",
+            "help": "max age of timestamp in minutes",
+            "hidden": "data.checkTimeStamp === false",
+            "min": 0,
+            "max": 86400000,
+            "default": 5,
+            "sm": 12,
+            "lg": 6
         },
         "lowEnabled": {
             "type": "checkbox",
             "default": false,
             "label": "trigger alarm with state=false",
             "help": "enable trigger on false otherwise with state=true",
-            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean'",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' || data.checkTimeStamp === true",
             "sm": 12,
             "lg": 6
         },
@@ -31,7 +46,7 @@
             ],
             "default": "gt",
             "help": "comparator of trigger",
-            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'number'",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'number' || data.checkTimeStamp === true",
             "sm": 12,
             "lg": 6
         },
@@ -39,7 +54,7 @@
             "type": "number",
             "default": 0,
             "help": "value to compare",
-            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'number'",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'number' || data.checkTimeStamp === true",
             "sm": 12,
             "lg": 6
         },
@@ -48,7 +63,7 @@
             "maxLength": "255",
             "default": "state not ok",
             "help": "text to compare if value of state = text then alarm will be triggerd",
-            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'string'",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'string' || data.checkTimeStamp === true",
             "sm": 12,
             "lg": 12
         },
@@ -70,7 +85,6 @@
             ],
             "default": "alarm",
             "help": "alarmClass",
-            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string'",
             "sm": 12,
             "lg": 6
         },
@@ -79,7 +93,6 @@
             "maxLength": "255",
             "defaultFunc": "customObj && customObj.common && customObj.common.name ? customObj.common.name + ' alarm':``",
             "help": "alarmtext",
-            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string'",
             "sm": 12
         },
         "alarmArea": {
@@ -87,7 +100,6 @@
             "maxLength": "255",
             "default": "undefined area",
             "help": "alarmArea e.g. room",
-            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string'",
             "sm": 12,
             "lg": 6
         },
@@ -96,7 +108,7 @@
             "newLine": true,
             "label": "De-bounce time",
             "help": "De-bounce interval(ms)",
-            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string'",
+            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string' || data.checkTimeStamp === true",
             "min": 0,
             "max": 86400000,
             "default": 300,
@@ -108,7 +120,6 @@
             "default": false,
             "label": "send alarmtext to telegram",
             "help": "enable send alarmtext to telegram",
-            "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' && customObj.common.type !== 'number' && customObj.common.type !== 'string'",
             "sm": 12,
             "lg": 6
         }

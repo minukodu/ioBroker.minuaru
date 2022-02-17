@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "minuaru",
-        "version": "0.9.1",
+        "version": "0.9.2",
         "news": {
+            "0.9.2": {
+                "en": "bugfix configuration and add timestamp-checker",
+                "de": "Bugfix-Konfiguration und Timestamp-Checker hinzugefügt",
+                "ru": "исправление конфигурации и добавление проверки временных меток",
+                "pt": "configuração de correção de bugs e adicionar verificador de carimbo de data/hora",
+                "nl": "bugfix-configuratie en tijdstempelcontrole toevoegen",
+                "fr": "configuration de correction de bugs et ajout d'un vérificateur d'horodatage",
+                "it": "configurazione bugfix e aggiungere timestamp-checker",
+                "es": "configuración de corrección de errores y agregar timestamp-checker",
+                "pl": "konfiguracja poprawek błędów i dodanie sprawdzania znaczników czasu",
+                "zh-cn": "错误修复配置并添加时间戳检查器"
+            },
             "0.9.1": {
                 "en": "send to telegram improvements",
                 "de": "Verbesserungen an Telegramm senden",

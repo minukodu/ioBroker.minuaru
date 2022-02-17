@@ -7,6 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 const utils = require("@iobroker/adapter-core");
 const fs = require("fs");
+const schedule = require('node-schedule');
 const databaseTools = require("./lib/sqlite");
 const jsonToHtml = require("./lib/jsonToHtml");
 
@@ -26,6 +27,7 @@ class Minuaru extends utils.Adapter {
 		// this.on("message", this.onMessage.bind(this));
 		this.on("unload", this.onUnload.bind(this));
 		this.registeredStates = {};
+		this.registeredStatesCheckTimeStamp = {};
 	}
 
 	/**
@@ -215,6 +217,10 @@ class Minuaru extends utils.Adapter {
 		});
 		// update lists at startup
 		this.updateListData();
+		// start schedule for checking timestamps every minute
+		this.checkTimeStampSchedule = schedule.scheduleJob('* * * * *', function () {
+			this.checkTimeStamps();
+		}.bind(this));
 	}
 
 	/**
@@ -227,6 +233,8 @@ class Minuaru extends utils.Adapter {
 			for (let id in this.registeredStates) {
 				this.unregisterState(id);
 			}
+			// cancel schedule for checking timestamps 
+			this.checkTimeStampSchedule.cancel();
 			callback();
 		} catch (e) {
 			callback();
@@ -273,7 +281,7 @@ class Minuaru extends utils.Adapter {
 				updateNeeded = true;
 			}
 			// request to acknowledge alarm ?
-			if (id === this.namespace + ".stateIdToAcknowledge" && this.registeredStates[state.val]) {
+			if (id === this.namespace + ".stateIdToAcknowledge" && (this.registeredStates[state.val] || this.registeredStatesCheckTimeStamp[state.val])) {
 				this.setStateAsync('stateIdToAcknowledge', "");
 				let data = {};
 				data.tsAck = Date.now();
@@ -282,11 +290,18 @@ class Minuaru extends utils.Adapter {
 				this.log.debug("acknowledge alarm: " + JSON.stringify(debugInfo));
 				updateNeeded = true;
 			}
+			// check timestamp of id ?
+			if (this.registeredStatesCheckTimeStamp[id] && this.registeredStatesCheckTimeStamp[id].enabled === true) {
+				this.log.debug("new timestamp of state: " + id + " : " + state.ts);
+				// store last timestamp
+				this.registeredStatesCheckTimeStamp[id].lastTimeStamp = state.ts;
+				return;
+			}
 			// new alarm ??
 			if (this.registeredStates[id] && this.registeredStates[id].enabled === true) {
 				// check correct type: only bool, number and string allowed:
 				if (this.registeredStates[id].type !== "boolean" && this.registeredStates[id].type !== "number" && this.registeredStates[id].type !== "string") {
-					this.log.error("wrong type of state: " + id + " : " + this.registeredStates[id].type)
+					this.log.error("wrong type of state: " + id + " : " + this.registeredStates[id].type);
 					return;
 				}
 				// init
@@ -296,7 +311,6 @@ class Minuaru extends utils.Adapter {
 				let customSettings = this.registeredStates[id];
 				// create data-object for Database
 				let data = {};
-				// constant data
 				data.stateId = id;
 				data.alarmText = customSettings.alarmText || id + "alarm";
 				data.alarmClass = customSettings.alarmClass || "alarm";
@@ -405,6 +419,55 @@ class Minuaru extends utils.Adapter {
 		}
 	}
 
+	//checkTimeStamp started by schedule
+	checkTimeStamps() {
+		this.log.debug("checking timestamps in progress...");
+		// this.log.debug(JSON.stringify(this.registeredStatesCheckTimeStamp));
+		let updateNeeded = false;
+		let debugInfo;
+		for (let id in this.registeredStatesCheckTimeStamp) {
+			// create data-object for Database
+			let data = {};
+			data.stateId = id;
+			data.alarmText = this.registeredStatesCheckTimeStamp[id].alarmText || id + "alarm";
+			data.alarmClass = this.registeredStatesCheckTimeStamp[id].alarmClass || "alarm";
+			data.alarmArea = this.registeredStatesCheckTimeStamp[id].alarmArea || "undefined";
+			let lastTimeStamp = this.registeredStatesCheckTimeStamp[id].lastTimeStamp;
+			let timeStampDiff = Date.now() - lastTimeStamp;
+			let timeStampMaxDiff = this.registeredStatesCheckTimeStamp[id].maxAgeTimeStampMinutes * 60 * 1000;
+			if (lastTimeStamp > 0 && timeStampDiff > timeStampMaxDiff) {
+				this.log.debug("timeStamp of state: " + id + " too old: " + Math.round(timeStampDiff / 60 / 1000) + " min");
+				if (this.registeredStatesCheckTimeStamp[id].timeStampTooOld === false) {
+					// alarm comes
+					data.tsComes = Date.now();
+					debugInfo = databaseTools.insertAlarmComes(this.db, data);
+					this.log.debug("insert alarm comes: " + JSON.stringify(debugInfo));
+					if (this.registeredStatesCheckTimeStamp[id].sendToTelegram === true) {
+						this.sendToTelegram(true, data);
+					}
+					updateNeeded = true;
+				}
+				this.registeredStatesCheckTimeStamp[id].timeStampTooOld = true;
+			} else {
+				if (this.registeredStatesCheckTimeStamp[id].timeStampTooOld === true) {
+					// alarm goes
+					data.tsGoes = Date.now();
+					debugInfo = databaseTools.updateAlarmGoes(this.db, data);
+					this.log.debug("insert alarm goes: " + JSON.stringify(debugInfo));
+					if (this.registeredStatesCheckTimeStamp[id].sendToTelegram === true) {
+						this.sendToTelegram(false, data);
+					}
+					updateNeeded = true;
+				}
+				this.registeredStatesCheckTimeStamp[id].timeStampTooOld = false;
+			}
+		}
+		if (updateNeeded === true) {
+			// update html amd json data
+			this.updateListData();
+		}
+	}
+
 	// update listData json and html for visualization
 	updateListData() {
 		// update html amd json data
@@ -475,12 +538,20 @@ class Minuaru extends utils.Adapter {
 		this.log.debug(this.namespace + "-data: " + JSON.stringify(customData));
 		if (customData && customData.enabled === true) {
 			this.log.debug("register Id: " + JSON.stringify(id));
-			this.registeredStates[id] = customData;
-			this.registeredStates[id].valueAtAlarm = null;
-			this.registeredStates[id].debounceTimer = null;
-			this.registeredStates[id].skipEvents = false;
-			this.registeredStates[id].alarmActive = false;
-			this.registeredStates[id].type = type;
+			if (customData.checkTimeStamp && customData.checkTimeStamp === true) {
+				// register state for checking the timestamp
+				this.registeredStatesCheckTimeStamp[id] = customData;
+				this.registeredStatesCheckTimeStamp[id].lastTimeStamp = 0;
+				this.registeredStatesCheckTimeStamp[id].timeStampTooOld = false;
+			} else {
+				// register state for checking the value
+				this.registeredStates[id] = customData;
+				this.registeredStates[id].valueAtAlarm = null;
+				this.registeredStates[id].debounceTimer = null;
+				this.registeredStates[id].skipEvents = false;
+				this.registeredStates[id].alarmActive = false;
+				this.registeredStates[id].type = type;
+			}
 		} else {
 			this.log.debug("do not register Id: " + JSON.stringify(id));
 		}
