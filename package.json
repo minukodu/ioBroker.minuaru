@@ -1,6 +1,6 @@
 {
   "name": "iobroker.minuaru",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "alarmsystem for ioBroker and minuvis",
   "author": {
     "name": "svallant",
@@ -19,7 +19,8 @@
   "dependencies": {
     "@iobroker/adapter-core": "^2.5.1",
     "better-sqlite3": "^7.4.6",
-    "dayjs": "^1.10.7"
+    "dayjs": "^1.10.7",
+    "node-schedule": "^2.1.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^2.2.2",
