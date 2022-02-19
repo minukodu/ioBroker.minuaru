@@ -17,7 +17,7 @@
             "label": "max age of timestamp in minutes",
             "help": "max age of timestamp in minutes",
             "hidden": "data.checkTimeStamp === false",
-            "min": 0,
+            "min": 2,
             "max": 86400000,
             "default": 5,
             "sm": 12,

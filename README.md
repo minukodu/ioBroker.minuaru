@@ -55,6 +55,9 @@ alarmsystem for ioBroker and minuvis
 
 ## Changelog
 
+### 0.9.3 (2022-02-19)
+* (svallant) fix data-directory and dependencies
+
 ### 0.9.2 (2022-02-16)
 * (svallant) bugfix configuration and add timestamp-checker
 

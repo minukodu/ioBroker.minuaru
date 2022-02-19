@@ -41,7 +41,11 @@ class Minuaru extends utils.Adapter {
 		let debugInfo;
 
 		// create db if not exits
-		const dbDir = this.getDatabaseDir(this.namespace);
+		const dbDir = utils.getAbsoluteInstanceDataDir(this);
+		// make directory if not exists
+		if (!fs.existsSync(dbDir)) {
+			fs.mkdirSync(dbDir);
+		}
 		const dbFile = dbDir + "/" + this.namespace + ".db";
 		this.log.debug("DatabasePath: " + dbFile);
 		this.db = databaseTools.initDatabase(dbFile);
@@ -250,6 +254,9 @@ class Minuaru extends utils.Adapter {
 		if (obj) {
 			// object has our custom data, then register state
 			if (obj.common && obj.common.custom && obj.common.custom[this.namespace]) {
+				// first unregister to clear the array
+				this.unregisterState(id);
+				// then register state
 				this.registerState(id, obj.common.custom[this.namespace], obj.common.type);
 				this.log.debug(`state ${id} registered: ${JSON.stringify(obj.common.custom)}`);
 			}
@@ -564,19 +571,11 @@ class Minuaru extends utils.Adapter {
 			this.registeredStates[id].debounceTimer && clearTimeout(this.registeredStates[id].debounceTimer);
 			delete this.registeredStates[id];
 		}
-	}
-	// Find sqlite data directory
-	getDatabaseDir(namespace) {
-		const tools = require(utils.controllerDir + '/lib/tools');
-		let config = tools.getConfigFileName().replace(/\\/g, '/');
-		const parts = config.split('/');
-		parts.pop();
-		config = parts.join('/') + '/files/' + namespace;
-		// create sqlite directory
-		if (!fs.existsSync(config)) {
-			fs.mkdirSync(config);
+		if (this.registeredStatesCheckTimeStamp[id]) {
+			this.log.debug("unregister Id: " + JSON.stringify(id));
+			delete this.registeredStatesCheckTimeStamp[id];
 		}
-		return config;
+
 	}
 
 }
