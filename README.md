@@ -54,6 +54,8 @@ alarmsystem for ioBroker and minuvis
 
 
 ## Changelog
+### 0.9.4 (2022-02-19)
+* (svallant) change adapters type
 
 ### 0.9.3 (2022-02-19)
 * (svallant) fix data-directory and dependencies
