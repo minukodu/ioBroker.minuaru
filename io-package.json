@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "minuaru",
-        "version": "0.9.3",
+        "version": "0.9.4",
         "news": {
+            "0.9.4": {
+                "en": "change adapters type",
+                "de": "Adaptertyp geändert",
+                "ru": "изменить тип адаптеров",
+                "pt": "alterar o tipo de adaptador",
+                "nl": "type adapter wijzigen:",
+                "fr": "changer le type d'adaptateurs",
+                "it": "cambiare tipo di adattatore",
+                "es": "cambiar el tipo de adaptadores",
+                "pl": "zmień typ adapterów",
+                "zh-cn": "更改适配器类型"
+            },
             "0.9.3": {
                 "en": "fix data-directory and dependencies",
                 "de": "Korrektur des Datenverzeichnises und der Abhängigkeiten",
@@ -105,7 +117,7 @@
         "readme": "https://github.com/minukodu/ioBroker.minuaru/blob/main/README.md",
         "loglevel": "info",
         "mode": "daemon",
-        "type": "storage",
+        "type": "misc-data",
         "compact": true,
         "connectionType": "local",
         "dataSource": "push",
