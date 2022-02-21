@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "minuaru",
-        "version": "0.9.4",
+        "version": "0.9.5",
         "news": {
+            "0.9.5": {
+                "en": "bugfix timestampcheck and configuration",
+                "de": "Bugfix Timestampcheck und Konfiguration",
+                "ru": "проверка временных меток и конфигурация",
+                "pt": "verificação de carimbo de data e hora de correção de bug e configuração",
+                "nl": "bugfix tijdstempelcontrole en configuratie",
+                "fr": "correction de bogue horodatage et configuration",
+                "it": "controllo del timestamp e della configurazione di bugfix",
+                "es": "corrección de errores marca de tiempo y configuración",
+                "pl": "naprawianie błędów sprawdzanie i konfiguracja znaczników czasu",
+                "zh-cn": "错误修复时间戳检查和配置"
+            },
             "0.9.4": {
                 "en": "change adapters type",
                 "de": "Adaptertyp geändert",

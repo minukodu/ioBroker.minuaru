@@ -235,7 +235,7 @@ class Minuaru extends utils.Adapter {
 		try {
 			// unregister all states
 			for (let id in this.registeredStates) {
-				this.unregisterState(id);
+				this.unregisterState(id, false);
 			}
 			// cancel schedule for checking timestamps 
 			this.checkTimeStampSchedule.cancel();
@@ -252,10 +252,10 @@ class Minuaru extends utils.Adapter {
 	 */
 	onObjectChange(id, obj) {
 		if (obj) {
+			// first unregister to clear the arrays
+			this.unregisterState(id, true);
 			// object has our custom data, then register state
 			if (obj.common && obj.common.custom && obj.common.custom[this.namespace]) {
-				// first unregister to clear the array
-				this.unregisterState(id);
 				// then register state
 				this.registerState(id, obj.common.custom[this.namespace], obj.common.type);
 				this.log.debug(`state ${id} registered: ${JSON.stringify(obj.common.custom)}`);
@@ -263,7 +263,7 @@ class Minuaru extends utils.Adapter {
 		} else {
 			// The object was deleted => unregister state
 			this.log.debug(`object ${id} deleted`);
-			this.unregisterState(id);
+			this.unregisterState(id, true);
 		}
 	}
 
@@ -548,7 +548,8 @@ class Minuaru extends utils.Adapter {
 			if (customData.checkTimeStamp && customData.checkTimeStamp === true) {
 				// register state for checking the timestamp
 				this.registeredStatesCheckTimeStamp[id] = customData;
-				this.registeredStatesCheckTimeStamp[id].lastTimeStamp = 0;
+				// set last timestamp === now then alarm will rise in maxAgeTimeStampMinutes
+				this.registeredStatesCheckTimeStamp[id].lastTimeStamp = Date.now();
 				this.registeredStatesCheckTimeStamp[id].timeStampTooOld = false;
 			} else {
 				// register state for checking the value
@@ -564,18 +565,27 @@ class Minuaru extends utils.Adapter {
 		}
 	}
 	// unregister state
-	unregisterState(id) {
+	unregisterState(id, clearAlarm) {
+		this.log.debug("unregister Id: " + JSON.stringify(id));
 		// clearTimeout and delete id from list 
 		if (this.registeredStates[id]) {
-			this.log.debug("unregister Id: " + JSON.stringify(id));
 			this.registeredStates[id].debounceTimer && clearTimeout(this.registeredStates[id].debounceTimer);
 			delete this.registeredStates[id];
 		}
 		if (this.registeredStatesCheckTimeStamp[id]) {
-			this.log.debug("unregister Id: " + JSON.stringify(id));
 			delete this.registeredStatesCheckTimeStamp[id];
 		}
-
+		if (clearAlarm === true) {
+			// set alarm to goes
+			let data = {};
+			let debugInfo;
+			data.stateId = id;
+			data.tsGoes = Date.now();
+			debugInfo = databaseTools.updateAlarmGoes(this.db, data);
+			this.log.debug("unregister and insert alarm goes: " + JSON.stringify(debugInfo));
+			// update html amd json data
+			this.updateListData();
+		}
 	}
 
 }
