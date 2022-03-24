@@ -1,8 +1,11 @@
 {
     "common": {
         "name": "minuaru",
-        "version": "0.9.5",
+        "version": "0.9.6",
         "news": {
+            "0.9.6": {
+                "en": "bugfix timestampcheck at startup"
+            },
             "0.9.5": {
                 "en": "bugfix timestampcheck and configuration",
                 "de": "Bugfix Timestampcheck und Konfiguration",

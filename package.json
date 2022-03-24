@@ -1,6 +1,6 @@
 {
   "name": "iobroker.minuaru",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "alarmsystem for ioBroker and minuvis",
   "author": {
     "name": "svallant",
