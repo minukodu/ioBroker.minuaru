@@ -456,7 +456,7 @@ class Minuaru extends utils.Adapter {
 				}
 				this.registeredStatesCheckTimeStamp[id].timeStampTooOld = true;
 			} else {
-				if (this.registeredStatesCheckTimeStamp[id].timeStampTooOld === true) {
+				if (this.registeredStatesCheckTimeStamp[id].timeStampTooOld === true || this.registeredStatesCheckTimeStamp[id].firstCheck === true) {
 					// alarm goes
 					data.tsGoes = Date.now();
 					debugInfo = databaseTools.updateAlarmGoes(this.db, data);
@@ -468,6 +468,8 @@ class Minuaru extends utils.Adapter {
 				}
 				this.registeredStatesCheckTimeStamp[id].timeStampTooOld = false;
 			}
+			// reset first check
+			this.registeredStatesCheckTimeStamp[id].firstCheck = false;
 		}
 		if (updateNeeded === true) {
 			// update html amd json data
@@ -551,6 +553,7 @@ class Minuaru extends utils.Adapter {
 				// set last timestamp === now then alarm will rise in maxAgeTimeStampMinutes
 				this.registeredStatesCheckTimeStamp[id].lastTimeStamp = Date.now();
 				this.registeredStatesCheckTimeStamp[id].timeStampTooOld = false;
+				this.registeredStatesCheckTimeStamp[id].firstCheck = true;
 			} else {
 				// register state for checking the value
 				this.registeredStates[id] = customData;
