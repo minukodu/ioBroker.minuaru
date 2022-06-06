@@ -442,6 +442,13 @@ class Minuaru extends utils.Adapter {
 			let lastTimeStamp = this.registeredStatesCheckTimeStamp[id].lastTimeStamp;
 			let timeStampDiff = Date.now() - lastTimeStamp;
 			let timeStampMaxDiff = this.registeredStatesCheckTimeStamp[id].maxAgeTimeStampMinutes * 60 * 1000;
+			// read status from database at first start and check if "gone"-Message is necessary
+			let setGoneAtFirstCheckAndTimeStampOk = false;
+			if (this.registeredStatesCheckTimeStamp[id].firstCheck === true) {
+				let getNbActiveAlarms = databaseTools.getNbActiveAlarmOfId(this.db, data);
+				setGoneAtFirstCheckAndTimeStampOk = (getNbActiveAlarms > 0) && (timeStampDiff <= timeStampMaxDiff);
+			}
+			this.log.debug("set Gone at first check of Timestamp necessary: " + JSON.stringify(setGoneAtFirstCheckAndTimeStampOk));
 			if (lastTimeStamp > 0 && timeStampDiff > timeStampMaxDiff) {
 				this.log.debug("timeStamp of state: " + id + " too old: " + Math.round(timeStampDiff / 60 / 1000) + " min");
 				if (this.registeredStatesCheckTimeStamp[id].timeStampTooOld === false) {
@@ -456,7 +463,7 @@ class Minuaru extends utils.Adapter {
 				}
 				this.registeredStatesCheckTimeStamp[id].timeStampTooOld = true;
 			} else {
-				if (this.registeredStatesCheckTimeStamp[id].timeStampTooOld === true || this.registeredStatesCheckTimeStamp[id].firstCheck === true) {
+				if (this.registeredStatesCheckTimeStamp[id].timeStampTooOld === true || setGoneAtFirstCheckAndTimeStampOk === true) {
 					// alarm goes
 					data.tsGoes = Date.now();
 					debugInfo = databaseTools.updateAlarmGoes(this.db, data);

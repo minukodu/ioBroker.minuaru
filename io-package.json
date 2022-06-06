@@ -1,10 +1,31 @@
 {
     "common": {
         "name": "minuaru",
-        "version": "0.9.6",
+        "version": "0.9.7",
         "news": {
+            "0.9.7": {
+                "en": "bugfix gone-message timestampcheck at startup",
+                "de": "Bugfix Gone-Message Timestampcheck beim Start",
+                "ru": "исправление: проверка временной метки исчезнувшего сообщения при запуске",
+                "pt": "verificação de carimbo de data/hora da mensagem de bugfix na inicialização",
+                "nl": "bugfix verdwenen-bericht tijdstempelcontrole bij opstarten",
+                "fr": "correction d'un bug lors de la vérification de l'horodatage du message disparu au démarrage",
+                "it": "bugfix controllo timestamp messaggio andato all'avvio",
+                "es": "corrección de errores: verificación de la marca de tiempo del mensaje desaparecido al inicio",
+                "pl": "poprawka błędów, sprawdzanie znacznika czasu zniknięcia wiadomości podczas uruchamiania",
+                "zh-cn": "错误修复启动时消失的消息时间戳检查"
+            },
             "0.9.6": {
-                "en": "bugfix timestampcheck at startup"
+                "en": "bugfix timestampcheck at startup",
+                "de": "Bugfix Timestampcheck beim Start",
+                "ru": "исправление ошибки проверка временной метки при запуске",
+                "pt": "verificação de carimbo de data e hora de correção de bug na inicialização",
+                "nl": "bugfix tijdstempelcontrole bij opstarten",
+                "fr": "correction de bogues timestampcheck au démarrage",
+                "it": "controllo del timestamp di bugfix all'avvio",
+                "es": "corrección de errores timestampcheck al inicio",
+                "pl": "naprawianie błędów sprawdzanie sygnatury czasowej przy starcie",
+                "zh-cn": "错误修复启动时的时间戳检查"
             },
             "0.9.5": {
                 "en": "bugfix timestampcheck and configuration",
