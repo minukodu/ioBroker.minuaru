@@ -54,6 +54,9 @@ alarmsystem for ioBroker and minuvis
 
 
 ## Changelog
+### 0.9.7 (2022-06-06)
+* (svallant) bugfix "gone"-message at timestampcheck at startup
+
 ### 0.9.6 (2022-03-24)
 * (svallant) bugfix timestampcheck at startup
 
