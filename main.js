@@ -405,6 +405,8 @@ class Minuaru extends utils.Adapter {
 								this.registeredStates[id].skipEvents = false;
 								this.getForeignState(id, (err, state) => {
 									this.log.debug("state at reset debounce timer: " + JSON.stringify(state));
+									this.log.debug("stateId at reset debounce timer: " + JSON.stringify(id));
+									this.log.debug("registeredState at reset debounce timer: " + JSON.stringify(this.registeredStates[id]));
 									this.log.debug("value at alarm: " + JSON.stringify(this.registeredStates[id].valueAtAlarm));
 									if (state && this.registeredStates[id].valueAtAlarm !== state.val) {
 										this.log.debug("handle alarm at reset debounce: " + JSON.stringify(id));

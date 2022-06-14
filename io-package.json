@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "minuaru",
-        "version": "0.9.7",
+        "version": "0.9.8",
         "news": {
+            "0.9.8": {
+                "en": "bugfix debouncing",
+                "de": "Fehlerbehebung beim Entprellen",
+                "ru": "устранение дребезга",
+                "pt": "correção de bug debounce",
+                "nl": "bugfix debouncen",
+                "fr": "correction de bugs anti-rebond",
+                "it": "bugfix antirimbalzo",
+                "es": "corrección de errores",
+                "pl": "usuwanie błędów naprawianych",
+                "zh-cn": "错误修复去抖动"
+            },
             "0.9.7": {
                 "en": "bugfix gone-message timestampcheck at startup",
                 "de": "Bugfix Gone-Message Timestampcheck beim Start",
