@@ -252,10 +252,10 @@ class Minuaru extends utils.Adapter {
 	 */
 	onObjectChange(id, obj) {
 		if (obj) {
-			// first unregister to clear the arrays
-			this.unregisterState(id, true);
 			// object has our custom data, then register state
 			if (obj.common && obj.common.custom && obj.common.custom[this.namespace]) {
+				// first unregister to clear the arrays
+				this.unregisterState(id, true);
 				// then register state
 				this.registerState(id, obj.common.custom[this.namespace], obj.common.type);
 				this.log.debug(`state ${id} registered: ${JSON.stringify(obj.common.custom)}`);
@@ -406,7 +406,6 @@ class Minuaru extends utils.Adapter {
 								this.getForeignState(id, (err, state) => {
 									this.log.debug("state at reset debounce timer: " + JSON.stringify(state));
 									this.log.debug("stateId at reset debounce timer: " + JSON.stringify(id));
-									this.log.debug("registeredState at reset debounce timer: " + JSON.stringify(this.registeredStates[id]));
 									this.log.debug("value at alarm: " + JSON.stringify(this.registeredStates[id].valueAtAlarm));
 									if (state && this.registeredStates[id].valueAtAlarm !== state.val) {
 										this.log.debug("handle alarm at reset debounce: " + JSON.stringify(id));
@@ -578,16 +577,19 @@ class Minuaru extends utils.Adapter {
 	}
 	// unregister state
 	unregisterState(id, clearAlarm) {
+		let idInList = false;
 		this.log.debug("unregister Id: " + JSON.stringify(id));
 		// clearTimeout and delete id from list 
 		if (this.registeredStates[id]) {
+			idInList = true;
 			this.registeredStates[id].debounceTimer && clearTimeout(this.registeredStates[id].debounceTimer);
 			delete this.registeredStates[id];
 		}
 		if (this.registeredStatesCheckTimeStamp[id]) {
+			idInList = true;
 			delete this.registeredStatesCheckTimeStamp[id];
 		}
-		if (clearAlarm === true) {
+		if (idInList = true && clearAlarm === true) {
 			// set alarm to goes
 			let data = {};
 			let debugInfo;

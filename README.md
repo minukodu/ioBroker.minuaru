@@ -54,6 +54,9 @@ alarmsystem for ioBroker and minuvis
 
 
 ## Changelog
+### 1.0.0 (2022-11-24)
+* (svallant) bugfix speichernutzung
+
 ### 0.9.8 (2022-06-14)
 * (svallant) bugfix debouncing
 
