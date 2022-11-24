@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "minuaru",
-        "version": "0.9.8",
+        "version": "1.0.0",
         "news": {
+            "1.0.0": {
+                "en": "bugfix memory usage",
+                "de": "bugfix Speichernutzung",
+                "ru": "bugfix использование памяти",
+                "pt": "uso de memória bugfix",
+                "nl": "vertaling:",
+                "fr": "bugfix mémoire utilisation",
+                "it": "utilizzo della memoria bugfix",
+                "es": "uso de memoria bugfix",
+                "pl": "bugowanie",
+                "zh-cn": "b 预示记忆的使用"
+            },
             "0.9.8": {
                 "en": "bugfix debouncing",
                 "de": "Fehlerbehebung beim Entprellen",
