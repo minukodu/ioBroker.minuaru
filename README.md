@@ -55,31 +55,7 @@ alarmsystem for ioBroker and minuvis
 
 ## Changelog
 ### 1.0.0 (2022-11-24)
-* (svallant) bugfix speichernutzung
-
-### 0.9.8 (2022-06-14)
-* (svallant) bugfix debouncing
-
-### 0.9.7 (2022-06-06)
-* (svallant) bugfix "gone"-message at timestampcheck at startup
-
-### 0.9.6 (2022-03-24)
-* (svallant) bugfix timestampcheck at startup
-
-### 0.9.5 (2022-02-21)
-* (svallant) bugfix timestampcheck and configuration
-
-### 0.9.4 (2022-02-19)
-* (svallant) change adapters type
-
-### 0.9.3 (2022-02-19)
-* (svallant) fix data-directory and dependencies
-
-### 0.9.2 (2022-02-16)
-* (svallant) bugfix configuration and add timestamp-checker
-
-### 0.9.1 (2022-01-30)
-* (svallant) improvement of telegram settings
+* (svallant) several bugfixes
 
 ### 0.9.0 (2022-01-29)
 * (svallant) beta release
