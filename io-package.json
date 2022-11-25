@@ -3,6 +3,19 @@
         "name": "minuaru",
         "version": "1.0.0",
         "news": {
+            "1.0.1": {
+                "en": "fix translation",
+                "de": "Übersetzung abgepasst",
+                "ru": "исправить перевод",
+                "pt": "corrigir a tradução",
+                "nl": "vertaling:",
+                "fr": "traduction correcte",
+                "it": "correzione della traduzione",
+                "es": "traducción",
+                "pl": "poprawić",
+                "uk": "фіксувати переклад",
+                "zh-cn": "fix 翻译"
+            },
             "1.0.0": {
                 "en": "several bugfixes",
                 "de": "mehrere bugfixes",
