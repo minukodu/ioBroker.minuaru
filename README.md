@@ -54,6 +54,9 @@ alarmsystem for ioBroker and minuvis
 
 
 ## Changelog
+### 1.1.0 (2023-03-19)
+* (svallant) respect ack-flag at control-states
+
 ### 1.0.1 (2022-11-25)
 * (svallant) fix translation
 
@@ -69,7 +72,7 @@ alarmsystem for ioBroker and minuvis
 ## License
 MIT License
 
-Copyright (c) 2022 svallant <svallant@gmx.eu>
+Copyright (c) 2023 svallant <svallant@gmx.eu>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -281,15 +281,15 @@ class Minuaru extends utils.Adapter {
 		if (state) {
 			let debugInfo;
 			// request to delete table in database ?
-			if (id === this.namespace + ".deleteAlarmTable" && state.val === true) {
-				this.setStateAsync('deleteAlarmTable', false);
+			if (id === this.namespace + ".deleteAlarmTable" && state.ack === true && state.val === true) {
+				this.setStateAsync('deleteAlarmTable', { val: false, ack: false });
 				debugInfo = databaseTools.deleteTable(this.db);
 				this.log.debug("delete table: " + JSON.stringify(debugInfo));
 				updateNeeded = true;
 			}
 			// request to acknowledge alarm ?
-			if (id === this.namespace + ".stateIdToAcknowledge" && (this.registeredStates[state.val] || this.registeredStatesCheckTimeStamp[state.val])) {
-				this.setStateAsync('stateIdToAcknowledge', "");
+			if (id === this.namespace + ".stateIdToAcknowledge" && state.ack === true && (this.registeredStates[state.val] || this.registeredStatesCheckTimeStamp[state.val])) {
+				this.setStateAsync('stateIdToAcknowledge', { val: "", ack: false });
 				let data = {};
 				data.tsAck = Date.now();
 				data.stateId = state.val || "";
@@ -546,7 +546,7 @@ class Minuaru extends utils.Adapter {
 				}
 			}, msg => {
 				this.debug.log("ack from telegram: " + msg.data);
-				this.setStateAsync("stateIdToAcknowledge", msg.data);
+				this.setStateAsync("stateIdToAcknowledge", { val: msg.data, ack: true });
 			});
 		}
 	}

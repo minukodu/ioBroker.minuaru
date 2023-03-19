@@ -1,125 +1,133 @@
 {
-    "common": {
-        "name": "minuaru",
-        "version": "1.0.1",
-        "news": {
-            "1.0.1": {
-                "en": "fix translation",
-                "de": "Übersetzung abgepasst",
-                "ru": "исправить перевод",
-                "pt": "corrigir a tradução",
-                "nl": "vertaling:",
-                "fr": "traduction correcte",
-                "it": "correzione della traduzione",
-                "es": "traducción",
-                "pl": "poprawić",
-                "uk": "фіксувати переклад",
-                "zh-cn": "fix 翻译"
-            },
-            "1.0.0": {
-                "en": "several bugfixes",
-                "de": "mehrere bugfixes",
-                "ru": "несколько исправлений",
-                "pt": "várias correções de bugs",
-                "nl": "verschillende insecten",
-                "fr": "plusieurs bugfixes",
-                "it": "diversi bugfix",
-                "es": "varios bugfixes",
-                "pl": "kilku błędów",
-                "uk": "кілька помилок",
-                "zh-cn": "b 几个导 言"
-            },
-            "0.9.0": {
-                "en": "beta release",
-                "de": "beta release",
-                "ru": "бета-релиз",
-                "pt": "versão beta",
-                "nl": "♪",
-                "fr": "beta release",
-                "it": "beta release",
-                "es": "beta release",
-                "pl": "beta release",
-                "uk": "бета реліз",
-                "zh-cn": "释放"
-            },
-            "0.0.1": {
-                "en": "initial release",
-                "de": "erste ausgabe",
-                "ru": "начальный выпуск",
-                "pt": "lançamento inicial",
-                "nl": "niet",
-                "fr": "initial release",
-                "it": "rilascio iniziale",
-                "es": "liberación inicial",
-                "pl": "pierwsze wydanie",
-                "uk": "початковий реліз",
-                "zh-cn": "初步释放"
-            }
-        },
-        "titleLang": {
-            "en": "minuvis alarmsystem",
-            "de": "minuvis alarmsystem",
-            "ru": "minuvis сигнализация",
-            "pt": "sistema de alarme minuvis",
-            "nl": "minuvis alarmsystem",
-            "fr": "minuvis alarmsystem",
-            "it": "minuvis sistema di allarme",
-            "es": "minuvis alarmsystem",
-            "pl": "alarm alarm",
-            "uk": "система сигналізації",
-            "zh-cn": "震惊系统"
-        },
-        "desc": {
-            "en": "alarmsystem for ioBroker and minuvis",
-            "de": "alarmanlage für ioBroker und minuvis",
-            "ru": "сигнализация для ioBroker и minuvis",
-            "pt": "sistema de alarme para ioBroker e minuvis",
-            "nl": "alarmsysteem voor ioBroker en minuvis",
-            "fr": "système d'alarme pour ioBroker et minuvis",
-            "it": "sistema di allarme per ioBroker e minuvis",
-            "es": "sistema de alarma para ioBroker y minuvis",
-            "pl": "alarm dla ioBrokera i minuvisa",
-            "uk": "система сигналізації для ioBroker та minuvis",
-            "zh-cn": "警觉系统"
-        },
-        "authors": [
-            "svallant <svallant@gmx.eu>"
-        ],
-        "keywords": [
-            "visualization",
-            "alarmsystem"
-        ],
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
-        "main": "main.js",
-        "icon": "minuaru.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/minukodu/ioBroker.minuaru/main/admin/minuaru.png",
-        "readme": "https://github.com/minukodu/ioBroker.minuaru/blob/main/README.md",
-        "loglevel": "info",
-        "mode": "daemon",
-        "type": "misc-data",
-        "compact": true,
-        "connectionType": "local",
-        "dataSource": "push",
-        "materialize": true,
-        "dependencies": [
-            {
-                "js-controller": ">=3.3.0"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=5.0.0"
-            }
-        ],
-        "adminUI": {
-            "config": "json",
-            "custom": "json"
-        },
-        "dataFolder": "minuaru.%INSTANCE%"
+  "common": {
+    "name": "minuaru",
+    "version": "1.1.0",
+    "news": {
+      "1.1.0": {
+        "en": "respect ack-flag at control-states",
+        "de": "Abfrage ack-flag bei Steuer-States",
+        "ru": "уважать ack-flag в контролируемых государствах",
+        "pt": "respeitar ack-flag em estados de controle",
+        "nl": "respect voor ack-flag bij controlestaten",
+        "fr": "respecter les ack-flag aux états de contrôle",
+        "it": "rispetto ack-flag a stato di controllo",
+        "es": "respeto ack-flag en estados de control",
+        "pl": "szanowanie agresji na stanowiskach kontrolnych",
+        "uk": "повага ack-flag при контрольних станах",
+        "zh-cn": "控制国遵守封锁"
+      },
+      "1.0.1": {
+        "en": "fix translation",
+        "de": "Übersetzung abgepasst",
+        "ru": "исправить перевод",
+        "pt": "corrigir a tradução",
+        "nl": "vertaling:",
+        "fr": "traduction correcte",
+        "it": "correzione della traduzione",
+        "es": "traducción",
+        "pl": "poprawić",
+        "uk": "фіксувати переклад",
+        "zh-cn": "fix 翻译"
+      },
+      "1.0.0": {
+        "en": "several bugfixes",
+        "de": "mehrere bugfixes",
+        "ru": "несколько исправлений",
+        "pt": "várias correções de bugs",
+        "nl": "verschillende insecten",
+        "fr": "plusieurs bugfixes",
+        "it": "diversi bugfix",
+        "es": "varios bugfixes",
+        "pl": "kilku błędów",
+        "uk": "кілька помилок",
+        "zh-cn": "b 几个导 言"
+      },
+      "0.9.0": {
+        "en": "beta release",
+        "de": "beta release",
+        "ru": "бета-релиз",
+        "pt": "versão beta",
+        "nl": "♪",
+        "fr": "beta release",
+        "it": "beta release",
+        "es": "beta release",
+        "pl": "beta release",
+        "uk": "бета реліз",
+        "zh-cn": "释放"
+      },
+      "0.0.1": {
+        "en": "initial release",
+        "de": "erste ausgabe",
+        "ru": "начальный выпуск",
+        "pt": "lançamento inicial",
+        "nl": "niet",
+        "fr": "initial release",
+        "it": "rilascio iniziale",
+        "es": "liberación inicial",
+        "pl": "pierwsze wydanie",
+        "uk": "початковий реліз",
+        "zh-cn": "初步释放"
+      }
     },
-    "native": {},
-    "objects": [],
-    "instanceObjects": []
+    "titleLang": {
+      "en": "minuvis alarmsystem",
+      "de": "minuvis alarmsystem",
+      "ru": "minuvis сигнализация",
+      "pt": "sistema de alarme minuvis",
+      "nl": "minuvis alarmsystem",
+      "fr": "minuvis alarmsystem",
+      "it": "minuvis sistema di allarme",
+      "es": "minuvis alarmsystem",
+      "pl": "alarm alarm",
+      "uk": "система сигналізації",
+      "zh-cn": "震惊系统"
+    },
+    "desc": {
+      "en": "alarmsystem for ioBroker and minuvis",
+      "de": "alarmanlage für ioBroker und minuvis",
+      "ru": "сигнализация для ioBroker и minuvis",
+      "pt": "sistema de alarme para ioBroker e minuvis",
+      "nl": "alarmsysteem voor ioBroker en minuvis",
+      "fr": "système d'alarme pour ioBroker et minuvis",
+      "it": "sistema di allarme per ioBroker e minuvis",
+      "es": "sistema de alarma para ioBroker y minuvis",
+      "pl": "alarm dla ioBrokera i minuvisa",
+      "uk": "система сигналізації для ioBroker та minuvis",
+      "zh-cn": "警觉系统"
+    },
+    "authors": ["svallant <svallant@gmx.eu>"],
+    "keywords": ["visualization", "alarmsystem"],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "minuaru.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/minukodu/ioBroker.minuaru/main/admin/minuaru.png",
+    "readme": "https://github.com/minukodu/ioBroker.minuaru/blob/main/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "misc-data",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "push",
+    "materialize": true,
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.0"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=5.0.0"
+      }
+    ],
+    "adminUI": {
+      "config": "json",
+      "custom": "json"
+    },
+    "dataFolder": "minuaru.%INSTANCE%"
+  },
+  "native": {},
+  "objects": [],
+  "instanceObjects": []
 }
