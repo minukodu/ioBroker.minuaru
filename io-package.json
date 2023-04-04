@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "minuaru",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "news": {
+      "1.1.1": {
+        "en": "update database",
+        "de": "update datenbank",
+        "ru": "обновление базы данных",
+        "pt": "atualizar banco de dados",
+        "nl": "update database",
+        "fr": "mettre à jour la base de données",
+        "it": "aggiornamento database",
+        "es": "base de datos de actualización",
+        "pl": "baza danych",
+        "uk": "оновлення бази даних",
+        "zh-cn": "更新数据库"
+      },
       "1.1.0": {
         "en": "respect ack-flag at control-states",
         "de": "Abfrage ack-flag bei Steuer-States",

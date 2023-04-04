@@ -54,6 +54,9 @@ alarmsystem for ioBroker and minuvis
 
 
 ## Changelog
+### 1.1.1 (2023-04-04)
+* (svallant) update database
+
 ### 1.1.0 (2023-03-19)
 * (svallant) respect ack-flag at control-states
 
