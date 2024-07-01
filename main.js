@@ -545,7 +545,7 @@ class Minuaru extends utils.Adapter {
 					]
 				}
 			}, msg => {
-				this.debug.log("ack from telegram: " + msg.data);
+				this.log.debug("ack from telegram: " + msg.data);
 				this.setStateAsync("stateIdToAcknowledge", { val: msg.data, ack: false });
 			});
 		}
