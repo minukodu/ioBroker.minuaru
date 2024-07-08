@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "minuaru",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "news": {
+      "1.1.1": {
+        "en": "several bugfixes",
+        "de": "mehrere bugfixes",
+        "ru": "несколько исправлений",
+        "pt": "várias correções de bugs",
+        "nl": "verschillende insecten",
+        "fr": "plusieurs bugfixes",
+        "it": "diversi bugfix",
+        "es": "varios bugfixes",
+        "pl": "kilku błędów",
+        "uk": "кілька помилок",
+        "zh-cn": "b 几个导 言"
+      },
       "1.1.0": {
         "en": "respect ack-flag at control-states",
         "de": "Abfrage ack-flag bei Steuer-States",
