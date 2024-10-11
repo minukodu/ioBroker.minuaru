@@ -8,7 +8,7 @@
 const utils = require("@iobroker/adapter-core");
 const fs = require("fs");
 const schedule = require('node-schedule');
-const databaseTools = require("./lib/sqlite");
+const databaseTools = require("./lib/duckdb");
 const jsonToHtml = require("./lib/jsonToHtml");
 
 class Minuaru extends utils.Adapter {
