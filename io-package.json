@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "minuaru",
-    "version": "1.1.1",
+    "version": "2.0.0-beta",
     "news": {
-      "1.1.1": {
+      "2.0.0-beta": {
         "en": "several bugfixes",
         "de": "mehrere bugfixes",
         "ru": "несколько исправлений",
@@ -54,32 +54,6 @@
         "pl": "kilku błędów",
         "uk": "кілька помилок",
         "zh-cn": "b 几个导 言"
-      },
-      "0.9.0": {
-        "en": "beta release",
-        "de": "beta release",
-        "ru": "бета-релиз",
-        "pt": "versão beta",
-        "nl": "♪",
-        "fr": "beta release",
-        "it": "beta release",
-        "es": "beta release",
-        "pl": "beta release",
-        "uk": "бета реліз",
-        "zh-cn": "释放"
-      },
-      "0.0.1": {
-        "en": "initial release",
-        "de": "erste ausgabe",
-        "ru": "начальный выпуск",
-        "pt": "lançamento inicial",
-        "nl": "niet",
-        "fr": "initial release",
-        "it": "rilascio iniziale",
-        "es": "liberación inicial",
-        "pl": "pierwsze wydanie",
-        "uk": "початковий реліз",
-        "zh-cn": "初步释放"
       }
     },
     "titleLang": {
@@ -108,16 +82,25 @@
       "uk": "система сигналізації для ioBroker та minuvis",
       "zh-cn": "警觉系统"
     },
-    "authors": ["svallant <svallant@gmx.eu>"],
-    "keywords": ["visualization", "alarmsystem"],
-    "license": "MIT",
+    "authors": [
+      "svallant <svallant@gmx.eu>"
+    ],
+    "keywords": [
+      "ioBroker",
+      "visualization",
+      "alarmsystem"
+    ],
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
     "platform": "Javascript/Node.js",
-    "main": "main.js",
     "icon": "minuaru.png",
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/minukodu/ioBroker.minuaru/main/admin/minuaru.png",
     "readme": "https://github.com/minukodu/ioBroker.minuaru/blob/main/README.md",
     "loglevel": "info",
+    "tier": 3,
     "mode": "daemon",
     "type": "misc-data",
     "compact": true,
@@ -126,7 +109,7 @@
     "materialize": true,
     "dependencies": [
       {
-        "js-controller": ">=3.3.0"
+        "js-controller": ">=5.0.19"
       }
     ],
     "globalDependencies": [
@@ -136,7 +119,8 @@
     ],
     "adminUI": {
       "config": "json",
-      "custom": "json"
+      "custom": "json",
+      "tab": "materialize"
     },
     "dataFolder": "minuaru.%INSTANCE%"
   },
