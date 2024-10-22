@@ -8,6 +8,7 @@
 const utils = require("@iobroker/adapter-core");
 const fs = require("fs");
 const schedule = require('node-schedule');
+const duckdb = require("duckdb-async");
 const databaseTools = require("./lib/duckdb");
 const jsonToHtml = require("./lib/jsonToHtml");
 
@@ -46,12 +47,16 @@ class Minuaru extends utils.Adapter {
 		if (!fs.existsSync(dbDir)) {
 			fs.mkdirSync(dbDir);
 		}
-		const dbFile = dbDir + "/" + this.namespace + ".db";
+		const dbFile = dbDir + "/" + this.namespace + ".duckdb.db";
 		this.log.debug("DatabasePath: " + dbFile);
-		this.db = databaseTools.initDatabase(dbFile);
+
+		// init Database
+		this.db = await duckdb.Database.create(dbFile);
+		this.log.debug("initDatabase");
+
 		// Create table
-		debugInfo = databaseTools.initTable(this.db);
-		this.log.debug("create table: " + JSON.stringify(debugInfo));
+		debugInfo = await databaseTools.initTable(this.db);
+		this.log.debug("create table");
 
 		// create states of adapter
 		await this.setObjectNotExistsAsync("nbAlarmsActive", {
@@ -276,14 +281,14 @@ class Minuaru extends utils.Adapter {
 		this.handleStateChange(id, state, false);
 	}
 
-	handleStateChange(id, state, startUp) {
+	async handleStateChange(id, state, startUp) {
 		let updateNeeded = false;
 		if (state) {
 			let debugInfo;
 			// request to delete table in database ?
 			if (id === this.namespace + ".deleteAlarmTable" && state.ack === false && state.val === true) {
 				this.setStateAsync('deleteAlarmTable', { val: false, ack: true });
-				debugInfo = databaseTools.deleteTable(this.db);
+				debugInfo = await databaseTools.deleteTable(this.db);
 				this.log.debug("delete table: " + JSON.stringify(debugInfo));
 				updateNeeded = true;
 			}
@@ -293,7 +298,7 @@ class Minuaru extends utils.Adapter {
 				let data = {};
 				data.tsAck = Date.now();
 				data.stateId = state.val || "";
-				debugInfo = databaseTools.updateAlarmAck(this.db, data);
+				debugInfo = await databaseTools.updateAlarmAck(this.db, data);
 				this.log.debug("acknowledge alarm: " + JSON.stringify(debugInfo));
 				updateNeeded = true;
 			}
@@ -344,7 +349,7 @@ class Minuaru extends utils.Adapter {
 						this.log.debug("state: " + id + " is not numerical, assume to be 0 (zero)");
 					}
 					// is alarm active ?
-					let getNbActiveAlarms = databaseTools.getNbActiveAlarmOfId(this.db, data);
+					let getNbActiveAlarms = await databaseTools.getNbActiveAlarmOfId(this.db, data);
 					// prepare value to compare
 					let valueToCompare = parseFloat(customSettings.comparatorValue);
 					if (customSettings.comparator === "lt") {
@@ -362,7 +367,7 @@ class Minuaru extends utils.Adapter {
 					}
 				} else { // assume string
 					// is alarm active ?
-					let getNbActiveAlarms = databaseTools.getNbActiveAlarmOfId(this.db, data);
+					let getNbActiveAlarms = await databaseTools.getNbActiveAlarmOfId(this.db, data);
 					// compare
 					this.log.debug("string  val: " + state.val);
 					this.log.debug("compare val: " + customSettings.comparatorText);
@@ -376,7 +381,7 @@ class Minuaru extends utils.Adapter {
 				// insert in database
 				if (this.registeredStates[id].skipEvents === false && alarmComes === true) {
 					data.tsComes = Date.now();
-					debugInfo = databaseTools.insertAlarmComes(this.db, data);
+					debugInfo = await databaseTools.insertAlarmComes(this.db, data);
 					this.log.debug("insert alarm comes: " + JSON.stringify(debugInfo));
 					if (customSettings.sendToTelegram === true) {
 						this.sendToTelegram(true, data);
@@ -385,7 +390,7 @@ class Minuaru extends utils.Adapter {
 				}
 				if (this.registeredStates[id].skipEvents === false && alarmGoes === true) {
 					data.tsGoes = Date.now();
-					debugInfo = databaseTools.updateAlarmGoes(this.db, data);
+					debugInfo = await databaseTools.updateAlarmGoes(this.db, data);
 					this.log.debug("insert alarm goes: " + JSON.stringify(debugInfo));
 					if (customSettings.sendToTelegram === true) {
 						this.sendToTelegram(false, data);
@@ -428,7 +433,7 @@ class Minuaru extends utils.Adapter {
 	}
 
 	//checkTimeStamp started by schedule
-	checkTimeStamps() {
+	async checkTimeStamps() {
 		this.log.debug("checking timestamps in progress...");
 		// this.log.debug(JSON.stringify(this.registeredStatesCheckTimeStamp));
 		let updateNeeded = false;
@@ -446,7 +451,7 @@ class Minuaru extends utils.Adapter {
 			// read status from database at first start and check if "gone"-Message is necessary
 			let setGoneAtFirstCheckAndTimeStampOk = false;
 			if (this.registeredStatesCheckTimeStamp[id].firstCheck === true) {
-				let getNbActiveAlarms = databaseTools.getNbActiveAlarmOfId(this.db, data);
+				let getNbActiveAlarms = await databaseTools.getNbActiveAlarmOfId(this.db, data);
 				setGoneAtFirstCheckAndTimeStampOk = (getNbActiveAlarms > 0) && (timeStampDiff <= timeStampMaxDiff);
 			}
 			this.log.debug("set Gone at first check of Timestamp necessary: " + JSON.stringify(setGoneAtFirstCheckAndTimeStampOk));
@@ -455,7 +460,7 @@ class Minuaru extends utils.Adapter {
 				if (this.registeredStatesCheckTimeStamp[id].timeStampTooOld === false) {
 					// alarm comes
 					data.tsComes = Date.now();
-					debugInfo = databaseTools.insertAlarmComes(this.db, data);
+					debugInfo = await databaseTools.insertAlarmComes(this.db, data);
 					this.log.debug("insert alarm comes: " + JSON.stringify(debugInfo));
 					if (this.registeredStatesCheckTimeStamp[id].sendToTelegram === true) {
 						this.sendToTelegram(true, data);
@@ -467,7 +472,7 @@ class Minuaru extends utils.Adapter {
 				if (this.registeredStatesCheckTimeStamp[id].timeStampTooOld === true || setGoneAtFirstCheckAndTimeStampOk === true) {
 					// alarm goes
 					data.tsGoes = Date.now();
-					debugInfo = databaseTools.updateAlarmGoes(this.db, data);
+					debugInfo = await databaseTools.updateAlarmGoes(this.db, data);
 					this.log.debug("insert alarm goes: " + JSON.stringify(debugInfo));
 					if (this.registeredStatesCheckTimeStamp[id].sendToTelegram === true) {
 						this.sendToTelegram(false, data);
@@ -486,9 +491,9 @@ class Minuaru extends utils.Adapter {
 	}
 
 	// update listData json and html for visualization
-	updateListData() {
+	async updateListData() {
 		// update html amd json data
-		let alarmListData = databaseTools.getAlarmListData(this.db);
+		let alarmListData = await databaseTools.getAlarmListData(this.db);
 		// this.log.debug("new alarm data: " + JSON.stringify(alarmListData));
 		// write json-Data in states
 		this.setStateAsync('jsonAlarmHistory', JSON.stringify(alarmListData.allAlarms) || "no data");
@@ -576,7 +581,7 @@ class Minuaru extends utils.Adapter {
 		}
 	}
 	// unregister state
-	unregisterState(id, clearAlarm) {
+	async unregisterState(id, clearAlarm) {
 		let idInList = false;
 		this.log.debug("unregister Id: " + JSON.stringify(id));
 		// clearTimeout and delete id from list 
@@ -595,7 +600,7 @@ class Minuaru extends utils.Adapter {
 			let debugInfo;
 			data.stateId = id;
 			data.tsGoes = Date.now();
-			debugInfo = databaseTools.updateAlarmGoes(this.db, data);
+			debugInfo = await databaseTools.updateAlarmGoes(this.db, data);
 			this.log.debug("unregister and insert alarm goes: " + JSON.stringify(debugInfo));
 			// update html amd json data
 			this.updateListData();
