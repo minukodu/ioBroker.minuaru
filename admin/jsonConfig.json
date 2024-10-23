@@ -1,5 +1,8 @@
 {
   "type": "tabs",
+  "tabsStyle": {
+    "width": "calc(100% - 100px)"
+  },
   "items": {
     "_telegram": {
       "type": "panel",
@@ -14,7 +17,7 @@
         },
         "telegram.user": {
           "type": "text",
-          "maxLength": "255",
+          "maxLength": 255,
           "placeholder": "username",
           "help": "username for telegram",
           "sm": 6
@@ -25,16 +28,16 @@
         },
         "telegram.alarm_textComes": {
           "type": "text",
-          "maxLength": "255",
+          "maxLength": 255,
           "default": "🔴 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
-          "help": "text for telegram if alarm comes, use %NL% for new line",
+          "help": "text for telegram for alarm comes, use %NL% for new line",
           "sm": 12
         },
         "telegram.alarm_textGoes": {
           "type": "text",
-          "maxLength": "255",
+          "maxLength": 255,
           "default": "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%",
-          "help": "text for telegram if alarm goes, use %NL% for new line",
+          "help": "text for telegram for alarm goes, use %NL% for new line",
           "sm": 12
         },
         "_divider_2": {
@@ -43,16 +46,16 @@
         },
         "telegram.warning_textComes": {
           "type": "text",
-          "maxLength": "255",
+          "maxLength": 255,
           "default": "🟡 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
-          "help": "text for telegram if warning comes, use %NL% for new line",
+          "help": "text for telegram for warning comes, use %NL% for new line",
           "sm": 12
         },
         "telegram.warning_textGoes": {
           "type": "text",
-          "maxLength": "255",
+          "maxLength": 255,
           "default": "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%",
-          "help": "text for telegram if warning goes, use %NL% for new line",
+          "help": "text for telegram for warning goes, use %NL% for new line",
           "sm": 12
         },
         "_divider_3": {
@@ -61,16 +64,16 @@
         },
         "telegram.information_textComes": {
           "type": "text",
-          "maxLength": "255",
+          "maxLength": 255,
           "default": "🔵 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
-          "help": "text for telegram if information comes, use %NL% for new line",
+          "help": "text for telegram for information comes, use %NL% for new line",
           "sm": 12
         },
         "telegram.information_textGoes": {
           "type": "text",
-          "maxLength": "255",
+          "maxLength": 255,
           "default": "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%",
-          "help": "text for telegram if information goes, use %NL% for new line",
+          "help": "text for telegram for information goes, use %NL% for new line",
           "sm": 12
         }
       }
@@ -81,7 +84,7 @@
       "items": {
         "columnNames": {
           "type": "text",
-          "maxLength": "255",
+          "maxLength": 255,
           "default": "time comes,time goes,time ack,alarmtext,area,acknowlegde",
           "help": "column names for minuvis: e.g. 'time comes,time goes,time ack,alarmtext,area,acknowlegde'",
           "sm": 12
