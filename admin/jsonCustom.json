@@ -60,7 +60,7 @@
         },
         "comparatorText": {
             "type": "text",
-            "maxLength": "255",
+            "maxLength": 255,
             "default": "state not ok",
             "help": "text to compare if value of state = text then alarm will be triggerd",
             "hidden": "!customObj || !customObj.common || customObj.common.type !== 'string' || data.checkTimeStamp === true",
@@ -84,22 +84,22 @@
                 }
             ],
             "default": "alarm",
-            "help": "alarmClass",
+            "help": "alarm-class",
             "sm": 12,
             "lg": 6
         },
         "alarmText": {
             "type": "text",
-            "maxLength": "255",
+            "maxLength": 255,
             "defaultFunc": "customObj && customObj.common && customObj.common.name ? customObj.common.name + ' alarm':``",
             "help": "alarmtext",
             "sm": 12
         },
         "alarmArea": {
             "type": "text",
-            "maxLength": "255",
+            "maxLength": 255,
             "default": "undefined area",
-            "help": "alarmArea e.g. room",
+            "help": "alarm-area e.g. room",
             "sm": 12,
             "lg": 6
         },

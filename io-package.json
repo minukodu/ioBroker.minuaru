@@ -86,7 +86,6 @@
       "svallant <svallant@gmx.eu>"
     ],
     "keywords": [
-      "ioBroker",
       "visualization",
       "alarmsystem"
     ],
@@ -106,7 +105,6 @@
     "compact": true,
     "connectionType": "local",
     "dataSource": "push",
-    "materialize": true,
     "dependencies": [
       {
         "js-controller": ">=5.0.19"
