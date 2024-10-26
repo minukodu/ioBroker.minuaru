@@ -13,6 +13,8 @@
 
 alarmsystem for ioBroker and minuvis
 
+> **BREAKING CHANGE with V2.0.0: Existing alarms of version 1.x will be deleted**
+
 ## Instructions
 
 - install adapter as usual
@@ -55,6 +57,7 @@ alarmsystem for ioBroker and minuvis
 
 ## Changelog
 ### 2.0.0-beta (2024-10-11)
+* BREAKING CHANGE: Existings alarms of version 1.x will be deleted
 * (svallant) fixing issues detected by repository checker
 * (svallant) switch to duckdb
 
