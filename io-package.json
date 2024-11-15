@@ -3,18 +3,18 @@
     "name": "minuaru",
     "version": "2.0.0",
     "news": {
-	  "2.0.0": {
-		"en": "release version 2",
-		"de": "Version 2 veröffentlichen",
-		"ru": "версия релиза 2",
-		"pt": "versão 2",
-		"nl": "versie 2 uitbrengen",
-		"fr": "sortie version 2",
-		"it": "versione 2",
-		"es": "lanzar la versión 2",
-		"pl": "wersja wydania 2",
-		"uk": "випуск версії 2",
-		"zh-cn": "发布版本 2"
+      "2.0.0": {
+        "en": "release version 2",
+        "de": "Version 2 veröffentlichen",
+        "ru": "версия релиза 2",
+        "pt": "versão 2",
+        "nl": "versie 2 uitbrengen",
+        "fr": "sortie version 2",
+        "it": "versione 2",
+        "es": "lanzar la versión 2",
+        "pl": "wersja wydania 2",
+        "uk": "випуск версії 2",
+        "zh-cn": "发布版本 2"
       },
       "2.0.0-beta": {
         "en": "several bugfixes",

@@ -67,7 +67,7 @@
     "lint": "eslint",
     "release": "release-script",
     "translate": "translate-adapter",
-	"dev-server": "dev-server"
+    "dev-server": "dev-server"
   },
   "bugs": {
     "url": "https://github.com/minukodu/ioBroker.minuaru/issues"
