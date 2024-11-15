@@ -1,6 +1,6 @@
 {
   "name": "iobroker.minuaru",
-  "version": "2.0.0-beta",
+  "version": "2.0.0",
   "description": "alarmsystem for ioBroker and minuvis",
   "author": {
     "name": "svallant",
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@iobroker/adapter-dev": "^1.0.1",
+    "@iobroker/dev-server": "^0.7.3",
     "@iobroker/testing": "^5.0.0",
     "@types/chai": "^5.0.0",
     "@types/chai-as-promised": "^8.0.1",
@@ -65,7 +66,8 @@
     "check": "tsc --noEmit -p tsconfig.check.json",
     "lint": "eslint",
     "release": "release-script",
-    "translate": "translate-adapter"
+    "translate": "translate-adapter",
+	"dev-server": "dev-server"
   },
   "bugs": {
     "url": "https://github.com/minukodu/ioBroker.minuaru/issues"

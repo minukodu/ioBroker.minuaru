@@ -56,6 +56,9 @@ alarmsystem for ioBroker and minuvis
 
 
 ## Changelog
+### 2.0.0 (2024-11-15)
+* (svallant) release of version 2
+
 ### 2.0.0-beta (2024-10-11)
 * BREAKING CHANGE: Existings alarms of version 1.x will be deleted
 * (svallant) fixing issues detected by repository checker
