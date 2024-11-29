@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "minuaru",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "news": {
+      "2.0.1": {
+        "en": "minor changes",
+        "de": "geringfügige änderungen",
+        "ru": "незначительные изменения",
+        "pt": "pequenas alterações",
+        "nl": "kleine wijzigingen",
+        "fr": "changements mineurs",
+        "it": "cambiamenti minori",
+        "es": "cambios menores",
+        "pl": "drobne zmiany",
+        "uk": "незначні зміни",
+        "zh-cn": "小变化"
+      },
       "2.0.0": {
         "en": "release version 2",
         "de": "Version 2 veröffentlichen",
