@@ -13,14 +13,22 @@
           "adapter": "telegram",
           "label": "telegram instance",
           "help": "telegram instance for receiving alarms",
-          "sm": 6
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 6,
+          "xl": 6
         },
         "telegram.user": {
           "type": "text",
           "maxLength": 255,
           "placeholder": "username",
           "help": "username for telegram",
-          "sm": 6
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 6,
+          "xl": 6
         },
         "_divider_1": {
           "type": "divider",
@@ -31,14 +39,22 @@
           "maxLength": 255,
           "default": "🔴 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
           "help": "text for telegram for alarm comes, use %NL% for new line",
-          "sm": 12
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         },
         "telegram.alarm_textGoes": {
           "type": "text",
           "maxLength": 255,
           "default": "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%",
           "help": "text for telegram for alarm goes, use %NL% for new line",
-          "sm": 12
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         },
         "_divider_2": {
           "type": "divider",
@@ -49,14 +65,22 @@
           "maxLength": 255,
           "default": "🟡 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
           "help": "text for telegram for warning comes, use %NL% for new line",
-          "sm": 12
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         },
         "telegram.warning_textGoes": {
           "type": "text",
           "maxLength": 255,
           "default": "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%",
           "help": "text for telegram for warning goes, use %NL% for new line",
-          "sm": 12
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         },
         "_divider_3": {
           "type": "divider",
@@ -67,14 +91,22 @@
           "maxLength": 255,
           "default": "🔵 %ALARMCLASS%%NL%*%ALARMTEXT%*%NL%Room: %ALARMAREA%",
           "help": "text for telegram for information comes, use %NL% for new line",
-          "sm": 12
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         },
         "telegram.information_textGoes": {
           "type": "text",
           "maxLength": 255,
           "default": "🟢 %ALARMCLASS%%NL%~%ALARMTEXT%~%NL%Room: %ALARMAREA%",
           "help": "text for telegram for information goes, use %NL% for new line",
-          "sm": 12
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         }
       }
     },
@@ -87,7 +119,11 @@
           "maxLength": 255,
           "default": "time comes,time goes,time ack,alarmtext,area,acknowlegde",
           "help": "column names for minuvis: e.g. 'time comes,time goes,time ack,alarmtext,area,acknowlegde'",
-          "sm": 12
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         },
         "_divider1": {
           "type": "divider"
@@ -98,7 +134,11 @@
           "label": "background color of active alarm e.g. #ee2e2c",
           "help": "background color of active alarm",
           "tooltip": "background color of active alarm",
-          "sm": 4
+          "xs": 12,
+          "sm": 12,
+          "md": 4,
+          "lg": 4,
+          "xl": 4
         },
         "alarm_colorGone": {
           "type": "color",
@@ -106,7 +146,11 @@
           "label": "background color of gone alarm e.g. #f48382",
           "help": "background color of gone alarm",
           "tooltip": "background color of gone alarm",
-          "sm": 4
+          "xs": 12,
+          "sm": 12,
+          "md": 4,
+          "lg": 4,
+          "xl": 4
         },
         "alarm_foregroundColor": {
           "type": "color",
@@ -114,7 +158,11 @@
           "label": "foreground color of alarm e.g. #000000",
           "help": "foreground color of alarm",
           "tooltip": "foreground color of alarm",
-          "sm": 4
+          "xs": 12,
+          "sm": 12,
+          "md": 4,
+          "lg": 4,
+          "xl": 4
         },
         "_divider2": {
           "type": "divider"
@@ -125,7 +173,11 @@
           "label": "background color of active warning e.g. #d5ca00",
           "help": "background color of active warning",
           "tooltip": "background color of active warning",
-          "sm": 4
+          "xs": 12,
+          "sm": 12,
+          "md": 4,
+          "lg": 4,
+          "xl": 4
         },
         "warning_colorGone": {
           "type": "color",
@@ -133,7 +185,11 @@
           "label": "background color of gone warning e.g. #d1cd86",
           "help": "background color of gone warning",
           "tooltip": "background color of gone warning",
-          "sm": 4
+          "xs": 12,
+          "sm": 12,
+          "md": 4,
+          "lg": 4,
+          "xl": 4
         },
         "warning_foregroundColor": {
           "type": "color",
@@ -141,7 +197,11 @@
           "label": "foreground color of warning e.g. #000000",
           "help": "foreground color of warning",
           "tooltip": "foreground color of warning",
-          "sm": 4
+          "xs": 12,
+          "sm": 12,
+          "md": 4,
+          "lg": 4,
+          "xl": 4
         },
         "_divider3": {
           "type": "divider"
@@ -152,7 +212,11 @@
           "label": "background color of active information e.g. #4e88ca",
           "help": "background color of active information",
           "tooltip": "background color of active information",
-          "sm": 4
+          "xs": 12,
+          "sm": 12,
+          "md": 4,
+          "lg": 4,
+          "xl": 4
         },
         "information_colorGone": {
           "type": "color",
@@ -160,7 +224,11 @@
           "label": "background color of gone information e.g. #82a4cb",
           "help": "background color of gone information",
           "tooltip": "background color of gone information",
-          "sm": 4
+          "xs": 12,
+          "sm": 12,
+          "md": 4,
+          "lg": 4,
+          "xl": 4
         },
         "information_foregroundColor": {
           "type": "color",
@@ -168,7 +236,11 @@
           "label": "foreground color of information e.g. #000000",
           "help": "foreground color of information",
           "tooltip": "foreground color of information",
-          "sm": 4
+          "xs": 12,
+          "sm": 12,
+          "md": 4,
+          "lg": 4,
+          "xl": 4
         }
       }
     }
