@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "minuaru",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "news": {
+      "2.0.2": {
+        "en": "update jsonConfig for responsive design",
+        "de": "update jsonConfig für responsive design",
+        "ru": "обновление jsonConfig для адаптивного дизайна",
+        "pt": "atualização jsonConfig para design responsivo",
+        "nl": "update jsonConfig voor responsief ontwerp",
+        "fr": "mettre à jour jsonConfig pour la conception réactive",
+        "it": "aggiornamento jsonConfig per design reattivo",
+        "es": "actualización jsonConfig para el diseño sensible",
+        "pl": "aktualizacja jsonConfig dla responsive design",
+        "uk": "оновлення jsonConfig для адаптивного дизайну",
+        "zh-cn": "更新 jsonConfig 适应性设计"
+      },
       "2.0.1": {
         "en": "minor changes",
         "de": "geringfügige änderungen",
