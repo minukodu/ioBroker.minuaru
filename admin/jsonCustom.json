@@ -8,8 +8,11 @@
             "label": "check if timestamp of state is too old",
             "help": "check if timestamp of state is too old",
             "hidden": "!customObj || !customObj.common",
+            "xs": 12,
             "sm": 12,
-            "lg": 12
+            "md": 12,
+            "lg": 12,
+            "xl": 12
         },
         "maxAgeTimeStampMinutes": {
             "type": "number",
@@ -20,8 +23,11 @@
             "min": 2,
             "max": 86400000,
             "default": 5,
+            "xs": 12,
             "sm": 12,
-            "lg": 6
+            "md": 6,
+            "lg": 6,
+            "xl": 6
         },
         "lowEnabled": {
             "type": "checkbox",
@@ -29,8 +35,11 @@
             "label": "trigger alarm with state=false",
             "help": "enable trigger on false otherwise with state=true",
             "hidden": "!customObj || !customObj.common || customObj.common.type !== 'boolean' || data.checkTimeStamp === true",
+            "xs": 12,
             "sm": 12,
-            "lg": 6
+            "md": 6,
+            "lg": 6,
+            "xl": 6
         },
         "comparator": {
             "type": "select",
@@ -47,16 +56,22 @@
             "default": "gt",
             "help": "comparator of trigger",
             "hidden": "!customObj || !customObj.common || customObj.common.type !== 'number' || data.checkTimeStamp === true",
+            "xs": 12,
             "sm": 12,
-            "lg": 6
+            "md": 6,
+            "lg": 6,
+            "xl": 6
         },
         "comparatorValue": {
             "type": "number",
             "default": 0,
             "help": "value to compare",
             "hidden": "!customObj || !customObj.common || customObj.common.type !== 'number' || data.checkTimeStamp === true",
+            "xs": 12,
             "sm": 12,
-            "lg": 6
+            "md": 6,
+            "lg": 6,
+            "xl": 6
         },
         "comparatorText": {
             "type": "text",
@@ -64,8 +79,11 @@
             "default": "state not ok",
             "help": "text to compare if value of state = text then alarm will be triggerd",
             "hidden": "!customObj || !customObj.common || customObj.common.type !== 'string' || data.checkTimeStamp === true",
+            "xs": 12,
             "sm": 12,
-            "lg": 12
+            "md": 12,
+            "lg": 12,
+            "xl": 12
         },
         "alarmClass": {
             "type": "select",
@@ -85,23 +103,33 @@
             ],
             "default": "alarm",
             "help": "alarm-class",
+            "xs": 12,
             "sm": 12,
-            "lg": 6
+            "md": 6,
+            "lg": 6,
+            "xl": 6
         },
         "alarmText": {
             "type": "text",
             "maxLength": 255,
             "defaultFunc": "customObj && customObj.common && customObj.common.name ? customObj.common.name + ' alarm':``",
             "help": "alarmtext",
-            "sm": 12
+            "xs": 12,
+            "sm": 12,
+            "md": 12,
+            "lg": 12,
+            "xl": 12
         },
         "alarmArea": {
             "type": "text",
             "maxLength": 255,
             "default": "undefined area",
             "help": "alarm-area e.g. room",
+            "xs": 12,
             "sm": 12,
-            "lg": 6
+            "md": 6,
+            "lg": 6,
+            "xl": 6
         },
         "debounce": {
             "type": "number",
@@ -112,16 +140,22 @@
             "min": 0,
             "max": 86400000,
             "default": 300,
+            "xs": 12,
             "sm": 12,
-            "lg": 6
+            "md": 6,
+            "lg": 6,
+            "xl": 6
         },
         "sendToTelegram": {
             "type": "checkbox",
             "default": false,
             "label": "send alarmtext to telegram",
             "help": "enable send alarmtext to telegram",
+            "xs": 12,
             "sm": 12,
-            "lg": 6
+            "md": 6,
+            "lg": 6,
+            "xl": 6
         }
     }
 }
