@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "minuaru",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "news": {
+      "2.0.3": {
+        "en": "fix bug in duckdbjs",
+        "de": "Fehlerbehebung in duckdbjs",
+        "ru": "Исправлена ошибка в duckdbjs",
+        "pt": "Corrigir bug no duckdjs",
+        "nl": "Bug in DuckDBJS opgelost",
+        "fr": "Correction d'un bug dans duckdbjs",
+        "it": "correggi bug in duckdbjs",
+        "es": "Corregir error en duckdbjs",
+        "pl": "napraw błąd w duckdbjs",
+        "uk": "виправити помилку в duckdbjs",
+        "zh-cn": "修复 duckdbjs 中的错误"
+      },
       "2.0.2": {
         "en": "update jsonConfig for responsive design",
         "de": "update jsonConfig für responsive design",
