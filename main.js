@@ -6,7 +6,7 @@
 
 // The adapter-core module gives you access to the core ioBroker functions
 const utils = require('@iobroker/adapter-core');
-const fs = require('fs');
+const fs = require('node:fs');
 const schedule = require('node-schedule');
 const duckdb = require('duckdb-async');
 const databaseTools = require('./lib/duckdb');
