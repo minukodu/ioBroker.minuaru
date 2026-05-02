@@ -53,6 +53,9 @@ alarmsystem for ioBroker and minuvis
 
 
 ## Changelog
+### **WORK IN PROGRESS**
+- (copilot) Adapter requires node.js >= 22 now
+
 ### 2.0.3 (2026-01-10)
 * (svallant) fix bug in duckdb
 
