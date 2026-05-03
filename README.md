@@ -83,6 +83,8 @@ alarmsystem for ioBroker and minuvis
 ### 0.0.1 (2022-01-16)
 * (svallant) initial release
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 MIT License
 
