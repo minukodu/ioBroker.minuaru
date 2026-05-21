@@ -53,6 +53,10 @@ alarmsystem for ioBroker and minuvis
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+- (ioBroker-Bot) Adapter requires js-controller >= 6.0.11 now.
+
 ### 2.0.3 (2026-01-10)
 * (svallant) fix bug in duckdb
 
