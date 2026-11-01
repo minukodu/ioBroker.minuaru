@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "minuaru",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "news": {
+      "2.0.4": {
+        "en": "fix bug when trigger with no new value",
+        "de": "Fehlerbehebung beim Auslösen ohne neuen Wert",
+        "ru": "Исправлена ошибка, возникающая при срабатывании триггера без нового значения.",
+        "pt": "Corrigido o bug que ocorria quando o gatilho não tinha um novo valor.",
+        "nl": "Bug verholpen die optrad bij het activeren zonder nieuwe waarde",
+        "fr": "Correction d'un bug lors du déclenchement sans nouvelle valeur",
+        "it": "Correzione del bug che si verifica quando il trigger non ha un nuovo valore",
+        "es": "Se corrige un error que se produce al activarse sin un nuevo valor.",
+        "pl": "napraw błąd, gdy wyzwalacz nie ma nowej wartości",
+        "uk": "виправлено помилку, коли спрацьовував тригер без нового значення",
+        "zh-cn": "修复触发器没有新值时的错误"
+      },
       "2.0.3": {
         "en": "fix bug in duckdbjs",
         "de": "Fehlerbehebung in duckdbjs",

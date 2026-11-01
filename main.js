@@ -28,6 +28,8 @@ class Minuaru extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
         this.registeredStates = {};
         this.registeredStatesCheckTimeStamp = {};
+        // last known values of registered states, used to skip events without value change
+        this.lastValues = new Map();
     }
 
     /**
@@ -221,6 +223,9 @@ class Minuaru extends utils.Adapter {
                             this.registerState(data.id, data.value[this.namespace], object.common.type);
                             this.log.debug(`this.registeredStates: ${JSON.stringify(this.registeredStates)}`);
                             this.getForeignState(data.id, (err, state) => {
+                                if (state) {
+                                    this.lastValues.set(data.id, state.val);
+                                }
                                 this.handleStateChange(data.id, state, true);
                                 this.log.debug(`initialize status of: ${data.id}`);
                             });
@@ -290,6 +295,14 @@ class Minuaru extends utils.Adapter {
      * @param state
      */
     onStateChange(id, state) {
+        // registered alarm states: only handle if value has changed
+        if (state && this.registeredStates[id]) {
+            if (this.lastValues.has(id) && this.lastValues.get(id) === state.val) {
+                this.log.debug(`onStateChange without new value: ${id} = ${JSON.stringify(state.val)}`);
+                return;
+            }
+            this.lastValues.set(id, state.val);
+        }
         this.handleStateChange(id, state, false);
     }
 
@@ -371,6 +384,7 @@ class Minuaru extends utils.Adapter {
                     }
                     // is alarm active ?
                     let getNbActiveAlarms = await databaseTools.getNbActiveAlarmOfId(this.db, data);
+                    this.log.debug("getNbActiveAlarms:" + getNbActiveAlarms);
                     // prepare value to compare
                     let valueToCompare = parseFloat(customSettings.comparatorValue);
                     if (customSettings.comparator === 'lt') {
@@ -381,8 +395,10 @@ class Minuaru extends utils.Adapter {
                         }
                     } else {
                         // assume "gt"
+                        this.log.debug("compare number gt:" + value + " > " + valueToCompare);
                         if (getNbActiveAlarms === 0 && value > valueToCompare) {
                             alarmComes = true;
+                            this.log.debug("number > valueToCompare => new alarm");
                         } else if (value <= valueToCompare) {
                             alarmGoes = true;
                         }
@@ -640,6 +656,7 @@ class Minuaru extends utils.Adapter {
             this.registeredStates[id].debounceTimer && clearTimeout(this.registeredStates[id].debounceTimer);
             delete this.registeredStates[id];
         }
+        this.lastValues.delete(id);
         if (this.registeredStatesCheckTimeStamp[id]) {
             idInList = true;
             delete this.registeredStatesCheckTimeStamp[id];

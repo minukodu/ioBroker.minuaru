@@ -53,6 +53,9 @@ alarmsystem for ioBroker and minuvis
 
 
 ## Changelog
+### 2.0.4 (2026-11-01)
+* (svallant) fix bug when trigger with no new value
+
 ### 2.0.3 (2026-01-10)
 * (svallant) fix bug in duckdb
 
