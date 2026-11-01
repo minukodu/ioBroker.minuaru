@@ -6,15 +6,15 @@
 
 // The adapter-core module gives you access to the core ioBroker functions
 const utils = require('@iobroker/adapter-core');
-const fs = require('fs');
+const fs = require('node:fs');
 const schedule = require('node-schedule');
-const duckdb = require('duckdb-async');
+const { DuckDBInstance } = require('@duckdb/node-api');
 const databaseTools = require('./lib/duckdb');
 const jsonToHtml = require('./lib/jsonToHtml');
 
 class Minuaru extends utils.Adapter {
     /**
-     * @param [options]
+     * @param [options] adapter options
      */
     constructor(options) {
         super({
@@ -52,7 +52,8 @@ class Minuaru extends utils.Adapter {
         this.log.debug(`DatabasePath: ${dbFile}`);
 
         // init Database
-        this.db = await duckdb.Database.create(dbFile);
+        this.dbInstance = await DuckDBInstance.create(dbFile);
+        this.db = await this.dbInstance.connect();
         this.log.debug('initDatabase');
 
         // Create table
@@ -248,7 +249,7 @@ class Minuaru extends utils.Adapter {
     /**
      * Is called when adapter shuts down - callback has to be called under any circumstances!
      *
-     * @param callback
+     * @param callback callback to call after cleanup
      */
     onUnload(callback) {
         try {
@@ -258,6 +259,9 @@ class Minuaru extends utils.Adapter {
             }
             // cancel schedule for checking timestamps
             this.checkTimeStampSchedule.cancel();
+            // close database
+            this.db?.closeSync();
+            this.dbInstance?.closeSync();
             callback();
         } catch (e) {
             this.log.debug(`error on unload: ${JSON.stringify(e)}`);
@@ -268,8 +272,8 @@ class Minuaru extends utils.Adapter {
     /**
      * Is called if a subscribed object changes
      *
-     * @param id
-     * @param obj
+     * @param id id of the changed object
+     * @param obj changed object, null if deleted
      */
     onObjectChange(id, obj) {
         if (obj) {
@@ -291,8 +295,8 @@ class Minuaru extends utils.Adapter {
     /**
      * Is called if a subscribed state changes
      *
-     * @param id
-     * @param state
+     * @param id id of the changed state
+     * @param state changed state, null if deleted
      */
     onStateChange(id, state) {
         // registered alarm states: only handle if value has changed
@@ -384,7 +388,7 @@ class Minuaru extends utils.Adapter {
                     }
                     // is alarm active ?
                     let getNbActiveAlarms = await databaseTools.getNbActiveAlarmOfId(this.db, data);
-                    this.log.debug("getNbActiveAlarms:" + getNbActiveAlarms);
+                    this.log.debug(`getNbActiveAlarms: ${getNbActiveAlarms}`);
                     // prepare value to compare
                     let valueToCompare = parseFloat(customSettings.comparatorValue);
                     if (customSettings.comparator === 'lt') {
@@ -395,10 +399,10 @@ class Minuaru extends utils.Adapter {
                         }
                     } else {
                         // assume "gt"
-                        this.log.debug("compare number gt:" + value + " > " + valueToCompare);
+                        this.log.debug(`compare number gt: ${value} > ${valueToCompare}`);
                         if (getNbActiveAlarms === 0 && value > valueToCompare) {
                             alarmComes = true;
-                            this.log.debug("number > valueToCompare => new alarm");
+                            this.log.debug('number > valueToCompare => new alarm');
                         } else if (value <= valueToCompare) {
                             alarmGoes = true;
                         }
@@ -444,7 +448,7 @@ class Minuaru extends utils.Adapter {
                         this.registeredStates[id].valueAtAlarm = state.val;
                         this.log.debug(`value at alarm: ${JSON.stringify(this.registeredStates[id].valueAtAlarm)}`);
                         this.registeredStates[id].skipEvents = true;
-                        this.registeredStates[id].debounceTimer = setTimeout(() => {
+                        this.registeredStates[id].debounceTimer = this.setTimeout(() => {
                             this.registeredStates[id].skipEvents = false;
                             this.getForeignState(id, (err, state) => {
                                 this.log.debug(`state at reset debounce timer: ${JSON.stringify(state)}`);
@@ -653,7 +657,7 @@ class Minuaru extends utils.Adapter {
         // clearTimeout and delete id from list
         if (this.registeredStates[id]) {
             idInList = true;
-            this.registeredStates[id].debounceTimer && clearTimeout(this.registeredStates[id].debounceTimer);
+            this.registeredStates[id].debounceTimer && this.clearTimeout(this.registeredStates[id].debounceTimer);
             delete this.registeredStates[id];
         }
         this.lastValues.delete(id);
@@ -677,7 +681,7 @@ class Minuaru extends utils.Adapter {
 if (require.main !== module) {
     // Export the constructor in compact mode
     /**
-     * @param [options]
+     * @param [options] adapter options
      */
     module.exports = options => new Minuaru(options);
 } else {

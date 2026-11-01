@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "minuaru",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "news": {
+      "2.0.5": {
+        "en": "switch from duckdb-async to @duckdb/node-api\nadd tests for node.js 24 and 26, require node.js >= 22\nfix issues detected by repository checker, require js-controller >= 6.0.11 and admin >= 7.6.20",
+        "de": "Umstellung von duckdb-async auf @duckdb/node-api\nTests für Node.js 24 und 26 hinzugefügt, Node.js >= 22 erforderlich\nvom Repository-Checker gefundene Probleme behoben, js-controller >= 6.0.11 und admin >= 7.6.20 erforderlich",
+        "ru": "переход с duckdb-async на @duckdb/node-api\nдобавлены тесты для node.js 24 и 26, требуется node.js >= 22\nисправлены проблемы, обнаруженные repository checker, требуется js-controller >= 6.0.11 и admin >= 7.6.20",
+        "pt": "mudança de duckdb-async para @duckdb/node-api\nadicionados testes para node.js 24 e 26, requer node.js >= 22\ncorrigidos problemas detectados pelo repository checker, requer js-controller >= 6.0.11 e admin >= 7.6.20",
+        "nl": "overstap van duckdb-async naar @duckdb/node-api\ntests voor node.js 24 en 26 toegevoegd, node.js >= 22 vereist\nproblemen gevonden door de repository checker opgelost, js-controller >= 6.0.11 en admin >= 7.6.20 vereist",
+        "fr": "passage de duckdb-async à @duckdb/node-api\najout de tests pour node.js 24 et 26, node.js >= 22 requis\ncorrection des problèmes détectés par le repository checker, js-controller >= 6.0.11 et admin >= 7.6.20 requis",
+        "it": "passaggio da duckdb-async a @duckdb/node-api\naggiunti test per node.js 24 e 26, richiesto node.js >= 22\nrisolti i problemi rilevati dal repository checker, richiesti js-controller >= 6.0.11 e admin >= 7.6.20",
+        "es": "cambio de duckdb-async a @duckdb/node-api\nañadidas pruebas para node.js 24 y 26, se requiere node.js >= 22\ncorregidos los problemas detectados por el repository checker, se requiere js-controller >= 6.0.11 y admin >= 7.6.20",
+        "pl": "przejście z duckdb-async na @duckdb/node-api\ndodano testy dla node.js 24 i 26, wymagany node.js >= 22\nnaprawiono problemy wykryte przez repository checker, wymagany js-controller >= 6.0.11 i admin >= 7.6.20",
+        "uk": "перехід з duckdb-async на @duckdb/node-api\nдодано тести для node.js 24 і 26, потрібен node.js >= 22\nвиправлено проблеми, виявлені repository checker, потрібен js-controller >= 6.0.11 і admin >= 7.6.20",
+        "zh-cn": "从 duckdb-async 切换到 @duckdb/node-api\n添加 node.js 24 和 26 的测试，要求 node.js >= 22\n修复 repository checker 发现的问题，要求 js-controller >= 6.0.11 和 admin >= 7.6.20"
+      },
       "2.0.4": {
         "en": "fix bug when trigger with no new value",
         "de": "Fehlerbehebung beim Auslösen ohne neuen Wert",
@@ -15,19 +28,6 @@
         "pl": "napraw błąd, gdy wyzwalacz nie ma nowej wartości",
         "uk": "виправлено помилку, коли спрацьовував тригер без нового значення",
         "zh-cn": "修复触发器没有新值时的错误"
-      },
-      "2.0.3": {
-        "en": "fix bug in duckdbjs",
-        "de": "Fehlerbehebung in duckdbjs",
-        "ru": "Исправлена ошибка в duckdbjs",
-        "pt": "Corrigir bug no duckdjs",
-        "nl": "Bug in DuckDBJS opgelost",
-        "fr": "Correction d'un bug dans duckdbjs",
-        "it": "correggi bug in duckdbjs",
-        "es": "Corregir error en duckdbjs",
-        "pl": "napraw błąd w duckdbjs",
-        "uk": "виправити помилку в duckdbjs",
-        "zh-cn": "修复 duckdbjs 中的错误"
       },
       "2.0.2": {
         "en": "update jsonConfig for responsive design",
@@ -59,10 +59,10 @@
         "en": "release version 2",
         "de": "Version 2 veröffentlichen",
         "ru": "версия релиза 2",
-        "pt": "versão 2",
+        "pt": "lançamento da versão 2",
         "nl": "versie 2 uitbrengen",
         "fr": "sortie version 2",
-        "it": "versione 2",
+        "it": "rilascio della versione 2",
         "es": "lanzar la versión 2",
         "pl": "wersja wydania 2",
         "uk": "випуск версії 2",
@@ -90,7 +90,7 @@
         "fr": "traduction correcte",
         "it": "correzione della traduzione",
         "es": "traducción",
-        "pl": "poprawić",
+        "pl": "poprawka tłumaczenia",
         "uk": "фіксувати переклад",
         "zh-cn": "fix 翻译"
       },
@@ -159,12 +159,12 @@
     "dataSource": "push",
     "dependencies": [
       {
-        "js-controller": ">=5.0.19"
+        "js-controller": ">=6.0.11"
       }
     ],
     "globalDependencies": [
       {
-        "admin": ">=5.0.0"
+        "admin": ">=7.6.20"
       }
     ],
     "adminUI": {

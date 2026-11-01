@@ -53,6 +53,11 @@ alarmsystem for ioBroker and minuvis
 
 
 ## Changelog
+### 2.0.5 (2026-11-01)
+* (svallant) switch from duckdb-async to @duckdb/node-api
+* (svallant) add tests for node.js 24 and 26, require node.js >= 22
+* (svallant) fix issues detected by repository checker, require js-controller >= 6.0.11 and admin >= 7.6.20
+
 ### 2.0.4 (2026-11-01)
 * (svallant) fix bug when trigger with no new value
 
