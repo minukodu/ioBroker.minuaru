@@ -15,7 +15,6 @@ export default [
             '*.config.mjs', 
             'build', 
             'admin/build', 
-            'admin/words.js',
             'admin/admin.d.ts',
             '**/adapter-config.d.ts',
             'helper/'     
@@ -30,4 +29,4 @@ export default [
         },
     },
     
-];
+];

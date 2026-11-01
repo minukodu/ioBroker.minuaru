@@ -1,6 +1,6 @@
 {
+    "i18n": false,
     "type": "panel",
-    "label": "settings",
     "items": {
         "checkTimeStamp": {
             "type": "checkbox",
